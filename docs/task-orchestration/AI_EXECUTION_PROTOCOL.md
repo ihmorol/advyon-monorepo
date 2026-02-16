@@ -8,22 +8,35 @@ This protocol defines deterministic execution for all AI agents working across `
 - `docs/task-orchestration/SSOT_WBS_TRACKER.md`
 - Team workflow file for active branch
 
-## Repository and Branch Model
-- Single GitHub repository, team branches only.
+## Repository and Branch Mode GitHub repository, team branches only.
+
+**Structure Context:**
+- **advyon-client**: Frontend codebase (React/Vite).
+- **advyon-server**: Backend codebase (Node/Express).
+- **docs**: Shared documentation and orchestration files.
+
+**Branch Rules:**
 - No direct work on integration or release branches.
-- Branch naming is fixed:
-  - `team1/foundation-document-reliability`
-  - `team2/public-content-metadata`
-  - `team3/ai-community-intelligence`
-  - `team4/core-practice-operations`
-  - `team5/admin-commerce-governance`
+- Branch naming is fixed per team/feature:
+  - `sro/feat/foundation-document-reliability`
+  - `msi/feat/public-content-metadata`
+  - `ihm/feat/ai-community-intelligence`
+  - `sif/feat/core-practice-operations`
+  - `ab/feat/admin-commerce-governance`
 
 ## Session Start Checklist (every device)
-1. `git fetch origin --prune`
-2. `git checkout <team-branch>`
-3. `git pull --rebase origin <team-branch>`
-4. Open SSOT and confirm assigned WBS IDs.
-5. Mark WBS row as `IP` only after Task Packet is ready.
+1. In `advyon-client`:
+   - `git fetch origin --prune`
+   - `git checkout <team-branch>`
+   - `git pull --rebase origin <team-branch>`
+   - `npm install` (if package.json changed)
+2. In `advyon-server`:
+   - `git fetch origin --prune`
+   - `git checkout <team-branch>`
+   - `git pull --rebase origin <team-branch>`
+   - `npm install` (if package.json changed)
+3. Open SSOT and confirm assigned WBS IDs.
+4. Mark WBS row as `IP` only after Task Packet is ready.
 
 ## Task Packet Template (required before implementation)
 - WBS ID
