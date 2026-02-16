@@ -41,11 +41,11 @@ This plan is a full decomposition of `TASK_PLAN.md` and includes:
 ## GitHub Multi-Device Coordination Protocol
 - Canonical remotes: one GitHub repository with two app folders (`advyon-client`, `advyon-server`) and branch-per-team execution.
 - Required team branches:
-  - `team1/foundation-document-reliability`
-  - `team2/public-content-metadata`
-  - `team3/ai-community-intelligence`
-  - `team4/core-practice-operations`
-  - `team5/admin-commerce-governance`
+  - `sro/feat/foundation-document-reliability`
+  - `msi/feat/public-content-metadata`
+  - `ihm/feat/ai-community-intelligence`
+  - `sif/feat/core-practice-operations`
+  - `ab/feat/admin-commerce-governance`
 - Device bootstrap sequence (every device):
   1. `git fetch origin --prune`
   2. `git checkout <team-branch>`
@@ -71,11 +71,11 @@ This plan is a full decomposition of `TASK_PLAN.md` and includes:
 ## Five Independent Team Workflows
 | Team | Branch | Primary Scope | Non-Overlap Boundary |
 |---|---|---|---|
-| Team 1 Foundation Reliability | `team1/foundation-document-reliability` | Auth sync, validation framework, document preview/download stability | Owns auth hooks, document viewer stack, document download endpoints |
-| Team 2 Public Experience | `team2/public-content-metadata` | Landing/public pages, content replacement, metadata APIs | Owns public pages and metadata module |
-| Team 3 AI and Community Intelligence | `team3/ai-community-intelligence` | Moderation, AI tools, AI context, community AI assistance | Owns AI and community modules |
-| Team 4 Core Practice Operations | `team4/core-practice-operations` | Cases, schedule, clients, messaging, notifications, archive, analytics, personalization | Owns case/schedule/client/message/socket/analytics operations |
-| Team 5 Admin Commerce Governance | `team5/admin-commerce-governance` | Admin controls, payments, security/performance/testing governance, release metrics | Owns admin/payment/subscription and governance controls |
+| Team 1 Foundation Reliability | `sro/feat/foundation-document-reliability` | Auth sync, validation framework, document preview/download stability | Owns auth hooks, document viewer stack, document download endpoints |
+| Team 2 Public Experience | `msi/feat/public-content-metadata` | Landing/public pages, content replacement, metadata APIs | Owns public pages and metadata module |
+| Team 3 AI and Community Intelligence | `ihm/feat/ai-community-intelligence` | Moderation, AI tools, AI context, community AI assistance | Owns AI and community modules |
+| Team 4 Core Practice Operations | `sif/feat/core-practice-operations` | Cases, schedule, clients, messaging, notifications, archive, analytics, personalization | Owns case/schedule/client/message/socket/analytics operations |
+| Team 5 Admin Commerce Governance | `ab/feat/admin-commerce-governance` | Admin controls, payments, security/performance/testing governance, release metrics | Owns admin/payment/subscription and governance controls |
 
 ## Full Task Breakdown (100 percent coverage of structured tasks)
 

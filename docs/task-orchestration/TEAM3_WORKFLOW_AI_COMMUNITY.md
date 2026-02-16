@@ -1,7 +1,7 @@
 # Team 3 Workflow - AI and Community Intelligence
 
 ## Branch and Ownership
-- Branch: `team3/ai-community-intelligence`
+- Branch: `ihm/feat/ai-community-intelligence`
 - Primary skills: `ai-ml-specialist`, `backend-lead`, `security-engineer`, `frontend-lead`
 - Agent roles: ai-engineer, backend-dev, frontend-dev, security-engineer, qa-tester
 
@@ -16,7 +16,7 @@
 - Do not modify payment/admin/operations modules outside published contracts.
 
 ## Device and GitHub Execution Rules
-- Start each session with: `git fetch origin --prune`, `git checkout team3/ai-community-intelligence`, `git pull --rebase origin team3/ai-community-intelligence`.
+- Start each session with: `git fetch origin --prune`, `git checkout ihm/feat/ai-community-intelligence`, `git pull --rebase origin ihm/feat/ai-community-intelligence`.
 - Work only in Team 3 owned paths unless orchestrator approves a cross-team contract change.
 - Build a Task Packet for each WBS item (scope, contracts, test plan, rollback) before code edits.
 - Push at least every 4 hours and update SSOT evidence links in the same cycle.
