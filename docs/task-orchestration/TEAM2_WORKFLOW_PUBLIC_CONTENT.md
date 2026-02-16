@@ -18,6 +18,14 @@
   - `advyon-server/src/app/modules/metadata/`
 - Do not modify Team 1/3/4/5 modules except contract adapters.
 
+## Device and GitHub Execution Rules
+- Start each session with: `git fetch origin --prune`, `git checkout team2/public-content-metadata`, `git pull --rebase origin team2/public-content-metadata`.
+- Work only in Team 2 owned paths unless orchestrator approves a cross-team contract change.
+- Build a Task Packet for each WBS item (scope, contracts, test plan, rollback) before code edits.
+- Push at least every 4 hours and update SSOT evidence links in the same cycle.
+- Unknown behavior is a blocker; set SSOT status to `BL` instead of guessing implementation.
+- Follow `docs/task-orchestration/AI_EXECUTION_PROTOCOL.md` for deterministic execution details.
+
 ## Execution Workflow (independent)
 1. Requirements pass: lock content, IA, and metadata schemas.
 2. Design pass: finalize page sections and responsive behavior.

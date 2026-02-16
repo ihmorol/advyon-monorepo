@@ -2,6 +2,7 @@
 
 ## Purpose
 This document is the only authoritative tracker for planning and execution status for all tasks from `TASK_PLAN.md`.
+Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCOL.md`.
 
 ## Status Legend
 - `NS`: Not started
@@ -14,6 +15,8 @@ This document is the only authoritative tracker for planning and execution statu
 - Commit policy is mandatory for every task: commit immediately after touching 3 or more files or completing a logical unit.
 - Requirement match cannot be marked pass until checklist items are complete and verified.
 - Every row must include evidence link (PR, commit hash, test report, or demo note).
+- Unknowns are blockers, not assumptions: move task to `BL` and document open question in handoff.
+- Every implementation task requires a Task Packet (scope, contracts, tests, rollback) before coding.
 
 ## Team and Branch Registry
 | Team | Branch |
@@ -84,6 +87,12 @@ This document is the only authoritative tracker for planning and execution statu
 | WBS-DEP-SV-01 | Enabler | Team 5 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-DEP-SV-02 | Enabler | Team 3 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-DEP-SV-03 | Enabler | Team 4 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
+| WBS-OPS-01 | Program | Team 5 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
+| WBS-OPS-02 | Program | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
+| WBS-OPS-03 | Program | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
+| WBS-OPS-04 | Program | Team 4 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
+| WBS-OPS-05 | Program | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
+| WBS-OPS-06 | Program | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-SM-MVP-01 | Governance | Team 1 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-SM-MVP-02 | Governance | Teams 1-5 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-SM-MVP-03 | Governance | Team 5 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
@@ -303,6 +312,7 @@ This document is the only authoritative tracker for planning and execution statu
 - [ ] Mark as read/unread
 - [ ] Notification preferences
 - [ ] Push notifications (PWA)
+- [ ] Email notifications channel
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-10.1 Landing Page
@@ -368,6 +378,44 @@ This document is the only authoritative tracker for planning and execution statu
 - [ ] Usage-based billing
 - [ ] Trial management
 - [ ] Payment method management
+- Commit rule: commit after >=3 files or logical unit.
+
+## Program Operations Checklists
+
+### WBS-OPS-01 Multi-device Git safety
+- [ ] Team branches protected in GitHub
+- [ ] Required status checks configured
+- [ ] CODEOWNERS guards cross-team ownership boundaries
+- Commit rule: commit after >=3 files or logical unit.
+
+### WBS-OPS-02 PR quality consistency
+- [ ] PR template enforces WBS mapping
+- [ ] PR template requires acceptance evidence
+- [ ] PR template requires rollback section
+- Commit rule: commit after >=3 files or logical unit.
+
+### WBS-OPS-03 Cross-device sync discipline
+- [ ] Mandatory fetch/rebase cadence documented and adopted
+- [ ] Draft PR updates required every 4 hours
+- [ ] Stale branch detection enabled
+- Commit rule: commit after >=3 files or logical unit.
+
+### WBS-OPS-04 Contract-first development
+- [ ] API contracts frozen before implementation windows
+- [ ] Contract changes versioned and approved
+- [ ] Consumer compatibility tests added for changed contracts
+- Commit rule: commit after >=3 files or logical unit.
+
+### WBS-OPS-05 Merge train and conflict playbook
+- [ ] Two daily merge windows scheduled
+- [ ] Conflict ownership and resolution SLA defined
+- [ ] Integration branch health checks required before merge
+- Commit rule: commit after >=3 files or logical unit.
+
+### WBS-OPS-06 Handoff SLA governance
+- [ ] Handoff template usage is mandatory
+- [ ] Handoff acceptance SLA is below 4 hours
+- [ ] Escalation path is documented and exercised
 - Commit rule: commit after >=3 files or logical unit.
 
 ## Technical Debt Checklists

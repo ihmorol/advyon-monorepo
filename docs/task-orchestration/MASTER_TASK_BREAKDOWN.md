@@ -38,6 +38,36 @@ This plan is a full decomposition of `TASK_PLAN.md` and includes:
 - Keep migration scripts idempotent and reversible for schema changes.
 - Every task has mandatory commit checkpoint: commit immediately after touching 3+ files or closing a logical unit.
 
+## GitHub Multi-Device Coordination Protocol
+- Canonical remotes: one GitHub repository with two app folders (`advyon-client`, `advyon-server`) and branch-per-team execution.
+- Required team branches:
+  - `team1/foundation-document-reliability`
+  - `team2/public-content-metadata`
+  - `team3/ai-community-intelligence`
+  - `team4/core-practice-operations`
+  - `team5/admin-commerce-governance`
+- Device bootstrap sequence (every device):
+  1. `git fetch origin --prune`
+  2. `git checkout <team-branch>`
+  3. `git pull --rebase origin <team-branch>`
+  4. run repo health checks before coding.
+- Sync rhythm:
+  - Every 4 hours: push branch and open/update draft PR.
+  - End of day: update SSOT status and handoff notes.
+  - No direct pushes to integration branch without PR checks.
+- Merge cadence:
+  - Team branches merge into integration in scheduled windows (2 windows per day).
+  - Integration merges to release only after QA + security gates pass for changed WBS IDs.
+
+## AI Precision Execution Rules (Anti-Hallucination)
+- Do not implement features outside explicit WBS scope for the active task.
+- Do not invent endpoints, payload fields, or file paths; if absent, create only what the WBS references or what is required to wire the referenced behavior.
+- Each task must include a `Task Packet` before coding:
+  - Objective, in-scope files, out-of-scope files, API contract, data contract, acceptance checklist, test plan, rollback plan.
+- Each PR must map changed files back to WBS IDs and include evidence for each acceptance item.
+- Unknowns must be logged as blockers in SSOT (`BL`) instead of guessed behavior.
+- Any cross-team file touch requires a documented contract update and orchestrator approval.
+
 ## Five Independent Team Workflows
 | Team | Branch | Primary Scope | Non-Overlap Boundary |
 |---|---|---|---|
@@ -64,7 +94,7 @@ This plan is a full decomposition of `TASK_PLAN.md` and includes:
 | WBS-5.5 | Documents Page Download Button | Team 1 | Implement secure signed download endpoints and client progress UI with batch queueing | `backend-lead`, `security-engineer`; backend-dev, frontend-dev, security-engineer | Commit after >=3 files or logical unit |
 | WBS-7.1 | Complete Client Management Workflow | Team 4 | Deliver full CRUD with soft-delete/archive patterns and role checks; keep list endpoint backward compatible | `backend-lead`, `frontend-lead`; backend-dev, frontend-dev | Commit after >=3 files or logical unit |
 | WBS-7.2 | Client-Lawyer Interconnection Message | Team 4 | Add case-scoped message model extensions, search indexes, and UI features in isolated message module | `backend-lead`, `frontend-lead`; backend-dev, frontend-dev | Commit after >=3 files or logical unit |
-| WBS-9.1 | Notification System Using Socket | Team 4 | Use namespaced socket events and idempotent client reducers; preserve existing REST notification endpoints | `backend-lead`, `devops-engineer`; backend-dev, frontend-dev, devops-engineer | Commit after >=3 files or logical unit |
+| WBS-9.1 | Notification System Using Socket | Team 4 | Use namespaced socket events and idempotent client reducers; preserve existing REST notification endpoints and deliver web push plus email notification channels | `backend-lead`, `devops-engineer`; backend-dev, frontend-dev, devops-engineer | Commit after >=3 files or logical unit |
 | WBS-10.1 | Landing Page Redesign | Team 2 | Rebuild sectionized marketing page while preserving route and auth CTA behaviors | `ui-ux-designer`, `frontend-lead`; ui-ux-designer, frontend-dev | Commit after >=3 files or logical unit |
 | WBS-10.2 | About Page | Team 2 | Replace placeholder with production content and responsive layout without route changes | `ui-ux-designer`, `product-manager`; ui-ux-designer, frontend-dev | Commit after >=3 files or logical unit |
 | WBS-10.4 | Contact Page | Team 2 | Create contact UI and backend route with validation and anti-spam rate limiting | `frontend-lead`, `backend-lead`, `security-engineer`; frontend-dev, backend-dev | Commit after >=3 files or logical unit |
@@ -126,6 +156,16 @@ This plan is a full decomposition of `TASK_PLAN.md` and includes:
 | WBS-DEP-SV-02 | Add moderation package (`@tensorflow-models/toxicity` preferred) | Team 3 | Run in async moderation queue to protect response latency | `ai-ml-specialist`; ai-engineer, backend-dev | Commit after >=3 files or logical unit |
 | WBS-DEP-SV-03 | Add `node-cron` | Team 4 | Schedule archive jobs with idempotent locks | `backend-lead`; backend-dev | Commit after >=3 files or logical unit |
 
+## Program Operations Backlog (Execution Control for 5 AI Teams)
+| WBS ID | Source Need | Team | How to Implement Without Breaking | Skill and Agents | Commit |
+|---|---|---|---|---|---|
+| WBS-OPS-01 | Multi-device Git safety | Team 5 | Enforce branch protections, required checks, and CODEOWNERS to prevent unreviewed cross-team changes | `devops-engineer`, `security-engineer`; devops-engineer, security-engineer | Commit after >=3 files or logical unit |
+| WBS-OPS-02 | PR quality consistency | Team 5 | Add PR template requiring WBS mapping, acceptance evidence, and rollback notes | `team-orchestrator`, `qa-testing-lead`; team-orchestrator, qa-tester | Commit after >=3 files or logical unit |
+| WBS-OPS-03 | Cross-device sync discipline | Team 5 | Define mandatory fetch/rebase/push cadence and stale-branch alerts | `team-orchestrator`, `devops-engineer`; team-orchestrator, devops-engineer | Commit after >=3 files or logical unit |
+| WBS-OPS-04 | Contract-first development | Team 4 | Publish and freeze API/data contracts per sprint window before implementation starts | `architecture-lead`, `backend-lead`; architecture-lead, backend-dev, frontend-dev | Commit after >=3 files or logical unit |
+| WBS-OPS-05 | Merge train and conflict playbook | Team 5 | Run twice-daily merge windows and deterministic conflict resolution rules | `team-orchestrator`; team-orchestrator, devops-engineer | Commit after >=3 files or logical unit |
+| WBS-OPS-06 | Handoff SLA governance | Team 5 | Track handoff SLA (<4 hours), enforce handoff template completeness, escalate blockers | `handoff-management`, `team-orchestrator`; team-orchestrator, qa-tester | Commit after >=3 files or logical unit |
+
 ## Success Metrics Verification Tasks
 | WBS ID | Metric Task | Team | Verification Method | Skill and Agents | Commit |
 |---|---|---|---|---|---|
@@ -155,3 +195,4 @@ This plan is a full decomposition of `TASK_PLAN.md` and includes:
 ## Single Source of Truth Link
 - Canonical tracker: `docs/task-orchestration/SSOT_WBS_TRACKER.md`
 - Team execution packs: `docs/task-orchestration/TEAM1_WORKFLOW_FOUNDATION.md` through `docs/task-orchestration/TEAM5_WORKFLOW_COMMERCIAL_GOVERNANCE.md`
+- Deterministic execution protocol: `docs/task-orchestration/AI_EXECUTION_PROTOCOL.md`

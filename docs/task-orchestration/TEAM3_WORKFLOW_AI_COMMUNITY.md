@@ -15,6 +15,14 @@
   - `advyon-client/src/store/useAIStore.js`
 - Do not modify payment/admin/operations modules outside published contracts.
 
+## Device and GitHub Execution Rules
+- Start each session with: `git fetch origin --prune`, `git checkout team3/ai-community-intelligence`, `git pull --rebase origin team3/ai-community-intelligence`.
+- Work only in Team 3 owned paths unless orchestrator approves a cross-team contract change.
+- Build a Task Packet for each WBS item (scope, contracts, test plan, rollback) before code edits.
+- Push at least every 4 hours and update SSOT evidence links in the same cycle.
+- Unknown behavior is a blocker; set SSOT status to `BL` instead of guessing implementation.
+- Follow `docs/task-orchestration/AI_EXECUTION_PROTOCOL.md` for deterministic execution details.
+
 ## Execution Workflow (independent)
 1. Requirements pass: define legal-only AI policies and moderation thresholds.
 2. Design pass: finalize AI service contracts, safety filters, and fallback behavior.

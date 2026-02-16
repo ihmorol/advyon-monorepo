@@ -19,6 +19,14 @@
   - `advyon-server/src/app/modules/document/`
 - Do not modify Team 2/3/4/5 owned modules unless orchestrator approves shared hotfix.
 
+## Device and GitHub Execution Rules
+- Start each session with: `git fetch origin --prune`, `git checkout team1/foundation-document-reliability`, `git pull --rebase origin team1/foundation-document-reliability`.
+- Work only in Team 1 owned paths unless an approved cross-team contract exists.
+- Build a Task Packet for each WBS item (scope, contracts, test plan, rollback) before code edits.
+- Push at least every 4 hours and update SSOT evidence links in the same cycle.
+- Unknown behavior is a blocker; set SSOT status to `BL` instead of guessing implementation.
+- Follow `docs/task-orchestration/AI_EXECUTION_PROTOCOL.md` for deterministic execution details.
+
 ## Execution Workflow (independent)
 1. Requirements pass: confirm WBS checklist items and acceptance tests from SSOT.
 2. Design pass: define error and loading patterns before coding.
