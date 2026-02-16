@@ -21,11 +21,11 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 ## Team and Branch Registry
 | Team | Branch |
 |---|---|
-| Team 1 Foundation Reliability | `team1/foundation-document-reliability` |
-| Team 2 Public Experience | `team2/public-content-metadata` |
-| Team 3 AI and Community Intelligence | `team3/ai-community-intelligence` |
-| Team 4 Core Practice Operations | `team4/core-practice-operations` |
-| Team 5 Admin Commerce Governance | `team5/admin-commerce-governance` |
+| Team 1 Foundation Reliability | `sro/feat/foundation-document-reliability` |
+| Team 2 Public Experience | `msi/feat/public-content-metadata` |
+| Team 3 AI and Community Intelligence | `ihm/feat/ai-community-intelligence` |
+| Team 4 Core Practice Operations | `sif/feat/core-practice-operations` |
+| Team 5 Admin Commerce Governance | `ab/feat/admin-commerce-governance` |
 
 ## Team 3 Task Packet and Execution Log
 
@@ -48,6 +48,13 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 | 2026-02-16T18:14:00+06:00 | WBS-DEP-SV-02 | IP | ai-ml-specialist | None | Validate runtime fallback + capture commit evidence | `@tensorflow-models/toxicity` + `@tensorflow/tfjs` added and installed; queue worker enabled |
 | 2026-02-16T18:14:00+06:00 | WBS-TD-SC-02 | IP | security-engineer + backend-lead | None | Extend sanitization across AI tools and community assistant outputs | Central sanitizer added and integrated into AI chat + community thread/reply flows |
 | 2026-02-16T18:24:00+06:00 | WBS-3.1 / WBS-DEP-SV-02 / WBS-TD-SC-02 | IP | Team 3 implementation pod | None | Begin WBS-3.4 centralized legal AI context manager | Commit `feb5396`; `npm run build` pass; `npx jest src/app/modules/community/community.moderation.service.test.ts --runInBand` pass |
+| 2026-02-16T18:36:00+06:00 | WBS-3.4 | IP | ai-ml-specialist + security-engineer | None | Implement WBS-3.3 tool endpoints/pages on top of shared context manager | Central AI context manager added with legal-only guardrails, injection rejection, and conversation memory |
+| 2026-02-16T18:40:00+06:00 | WBS-3.4 | IP | ai-ml-specialist + security-engineer | None | Start AI tools service/page implementation (WBS-3.3) | Commit `6246fc4`; `npm run build` pass; AI context manager tests + moderation tests pass |
+| 2026-02-16T19:05:00+06:00 | WBS-3.3 | IP | ai-ml-specialist + frontend-lead | None | Close Team 3 validation and KPI tasks (WBS-1.4 team scope, WBS-SM-MVP-02, WBS-SM-KPI-04/05) | Commits `3116ae4` (backend) + `362672d` (frontend); server build+4 jest suites pass; client build pass |
+| 2026-02-16T19:05:00+06:00 | WBS-3.2 | IP | ai-ml-specialist + backend-lead + frontend-lead | None | Add verification coverage and KPI instrumentation for AI/community events | Similar thread suggestions, answer suggestions, legal refs, thread summaries, and smart tags implemented as non-blocking assist features |
+| 2026-02-16T19:18:00+06:00 | WBS-1.4 (Team 3) / WBS-SM-MVP-02 | BL | frontend-lead + qa-testing-lead | `vitest` cannot run in this environment (esbuild spawn `EPERM`/timeout) | Use direct Node schema validation script as interim evidence; continue server/client build gates | Client-side Zod validation added for create-thread/reply/AI-tool input; manual schema check command passed |
+| 2026-02-16T19:18:00+06:00 | WBS-SM-KPI-04 / WBS-SM-KPI-05 | IP | ai-ml-specialist + data-engineer + backend-lead | None | Commit KPI instrumentation and expose metrics endpoints | AI tool metrics endpoint and community engagement event tracking/aggregation implemented; server build+tests pass |
+| 2026-02-16T19:26:00+06:00 | WBS-1.4 (Team 3) / WBS-SM-KPI-04 / WBS-SM-KPI-05 | IP | Team 3 implementation pod | None | Finalize root SSOT + submodule pointer commit | Commits `4febb0f` (server KPI+validation) + `68c15a8` (client Zod parity); server build+jest pass; client build pass |
 
 ## Master WBS Status Board
 | WBS ID | Tier | Team | Status | Requirement Match | QA Gate | Security Gate | Commit Rule | Evidence |
@@ -55,13 +62,13 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 | WBS-1.1 | MVP | Team 2 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-1.2 | MVP | Team 1 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-1.3 | MVP | Team 1 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-1.4 | MVP | Teams 1-5 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
+| WBS-1.4 | MVP | Teams 1-5 | IP | In Progress | Build Passed | Pending | Commit after >=3 files or logical unit | Team 3 scope commits `feb5396`, `4febb0f`, `68c15a8`; server+client validation parity delivered |
 | WBS-2.1 | MVP | Team 2 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-2.2 | MVP | Team 2 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-3.1 | Post-MVP | Team 3 | IP | In Progress | Build Passed | Pending | Commit after >=3 files or logical unit | Commit `feb5396`; moderation queue, review+appeal APIs, and auto-moderation hooks implemented |
-| WBS-3.2 | Future | Team 3 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-3.3 | Post-MVP | Team 3 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-3.4 | Post-MVP | Team 3 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
+| WBS-3.2 | Future | Team 3 | IP | In Progress | Build Passed | Pending | Commit after >=3 files or logical unit | Commit `3116ae4` + `362672d`; AI assistance helpers shipped as optional/non-blocking APIs + UX |
+| WBS-3.3 | Post-MVP | Team 3 | IP | In Progress | Build Passed | Pending | Commit after >=3 files or logical unit | Commit `3116ae4` + `362672d`; AI tools backend/history/export + `AIToolsPage` delivered |
+| WBS-3.4 | Post-MVP | Team 3 | IP | In Progress | Build Passed | Pending | Commit after >=3 files or logical unit | Commit `6246fc4`; centralized legal context manager + prompt-injection guard + memory enabled |
 | WBS-4.1 | Post-MVP | Team 4 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-4.2 | Post-MVP | Team 4 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-5.1 | MVP | Team 4 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
@@ -116,7 +123,7 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 | WBS-OPS-05 | Program | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-OPS-06 | Program | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-SM-MVP-01 | Governance | Team 1 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-SM-MVP-02 | Governance | Teams 1-5 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
+| WBS-SM-MVP-02 | Governance | Teams 1-5 | BL | Pending | Pending | Pending | Commit after >=3 files or logical unit | Team 3 blocker: vitest run blocked by environment (`spawn EPERM`); fallback Node schema validation script passed |
 | WBS-SM-MVP-03 | Governance | Team 5 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-SM-MVP-04 | Governance | Team 5 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-SM-MVP-05 | Governance | Team 4 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
@@ -125,8 +132,8 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 | WBS-SM-KPI-01 | Governance | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-SM-KPI-02 | Governance | Team 4 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-SM-KPI-03 | Governance | Team 1 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-SM-KPI-04 | Governance | Team 3 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-SM-KPI-05 | Governance | Team 3 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
+| WBS-SM-KPI-04 | Governance | Team 3 | IP | In Progress | Build Passed | N/A | Commit after >=3 files or logical unit | Commit `4febb0f`; AI tool usage/success/fail/latency metrics endpoint added (`/ai/tools/metrics`) |
+| WBS-SM-KPI-05 | Governance | Team 3 | IP | In Progress | Build Passed | N/A | Commit after >=3 files or logical unit | Commit `4febb0f`; community engagement event tracking + metrics endpoint (`/community/metrics/engagement`) |
 | WBS-SM-KPI-06 | Governance | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-SM-KPI-07 | Governance | Team 2 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 
