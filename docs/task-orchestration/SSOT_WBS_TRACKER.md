@@ -27,6 +27,28 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 | Team 4 Core Practice Operations | `team4/core-practice-operations` |
 | Team 5 Admin Commerce Governance | `team5/admin-commerce-governance` |
 
+## Team 3 Task Packet and Execution Log
+
+### Active Task Packet: WBS-3.1 Content Moderation for Community Hub
+- Objective: Deliver toxicity/spam/off-topic moderation with auto-flagging, review queue, configurable threshold, and appeals for thread/reply creation.
+- In-scope files: `advyon-server/src/app/modules/community/*`, `advyon-server/src/app/modules/ai/*`, Team 3 owned client community/AI files.
+- Out-of-scope files: payment/admin/operations modules, non-Team-3 domain features.
+- API contract changes: additive moderation metadata on thread/reply create responses and review/appeal endpoints.
+- Data/schema changes: additive moderation decision records, queue state, and appeal state.
+- Acceptance checklist source: WBS-3.1 checklist in this document.
+- Test plan: server unit/integration for moderation path plus client smoke for moderation UX.
+- Rollback plan: disable moderation checks with feature flag and retain review queue records.
+- Risk and blocker notes: pending package install/runtime constraints for moderation model.
+
+### Team 3 Execution Cycle Log
+| Timestamp | WBS ID | Status | Owner/Role | Blockers | Next Action | Evidence |
+|---|---|---|---|---|---|---|
+| 2026-02-16T17:52:54+06:00 | WBS-3.1 | IP | Team Orchestrator -> ai-ml-specialist + backend-lead | None | Implement moderation core + queue-safe execution | Branch `ihm/feat/ai-community-intelligence` ready; task packet created |
+| 2026-02-16T18:14:00+06:00 | WBS-3.1 | IP | ai-ml-specialist + backend-lead | None | Add AI context manager and tools contract integration | Moderation queue models/service/routes wired; community create/reply now auto-moderated |
+| 2026-02-16T18:14:00+06:00 | WBS-DEP-SV-02 | IP | ai-ml-specialist | None | Validate runtime fallback + capture commit evidence | `@tensorflow-models/toxicity` + `@tensorflow/tfjs` added and installed; queue worker enabled |
+| 2026-02-16T18:14:00+06:00 | WBS-TD-SC-02 | IP | security-engineer + backend-lead | None | Extend sanitization across AI tools and community assistant outputs | Central sanitizer added and integrated into AI chat + community thread/reply flows |
+| 2026-02-16T18:24:00+06:00 | WBS-3.1 / WBS-DEP-SV-02 / WBS-TD-SC-02 | IP | Team 3 implementation pod | None | Begin WBS-3.4 centralized legal AI context manager | Commit `feb5396`; `npm run build` pass; `npx jest src/app/modules/community/community.moderation.service.test.ts --runInBand` pass |
+
 ## Master WBS Status Board
 | WBS ID | Tier | Team | Status | Requirement Match | QA Gate | Security Gate | Commit Rule | Evidence |
 |---|---|---|---|---|---|---|---|---|
@@ -36,7 +58,7 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 | WBS-1.4 | MVP | Teams 1-5 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-2.1 | MVP | Team 2 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-2.2 | MVP | Team 2 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-3.1 | Post-MVP | Team 3 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
+| WBS-3.1 | Post-MVP | Team 3 | IP | In Progress | Build Passed | Pending | Commit after >=3 files or logical unit | Commit `feb5396`; moderation queue, review+appeal APIs, and auto-moderation hooks implemented |
 | WBS-3.2 | Future | Team 3 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-3.3 | Post-MVP | Team 3 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-3.4 | Post-MVP | Team 3 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
@@ -76,7 +98,7 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 | WBS-TD-TS-04 | Ongoing | Team 2 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-TD-TS-05 | Ongoing | Team 5 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-TD-SC-01 | Ongoing | Team 5 owner | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-SC-02 | Ongoing | Team 3 owner | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
+| WBS-TD-SC-02 | Ongoing | Team 3 owner | IP | In Progress | Build Passed | Pending | Commit after >=3 files or logical unit | Commit `feb5396`; centralized input sanitizer integrated in AI/community scope |
 | WBS-TD-SC-03 | Ongoing | Team 1 owner | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-TD-SC-04 | Ongoing | Team 5 owner | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-TD-SC-05 | Ongoing | Team 5 owner | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
@@ -85,7 +107,7 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 | WBS-DEP-CL-03 | Enabler | Team 4 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-DEP-CL-04 | Enabler | Team 4 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-DEP-SV-01 | Enabler | Team 5 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-DEP-SV-02 | Enabler | Team 3 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
+| WBS-DEP-SV-02 | Enabler | Team 3 | IP | In Progress | Build Passed | Pending | Commit after >=3 files or logical unit | Commit `feb5396`; toxicity dependencies installed and queue-safe moderation flow integrated |
 | WBS-DEP-SV-03 | Enabler | Team 4 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-OPS-01 | Program | Team 5 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-OPS-02 | Program | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
