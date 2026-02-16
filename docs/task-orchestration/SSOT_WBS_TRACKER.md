@@ -41,6 +41,7 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 - Risk and blocker notes: pending package install/runtime constraints for moderation model.
 
 ### Team 3 Execution Cycle Log
+Note: this log is chronological. `IP` rows capture in-flight status at that timestamp; final status is recorded in later `DN` rows and in the Team 3 DoD Snapshot/Master WBS board.
 | Timestamp | WBS ID | Status | Owner/Role | Blockers | Next Action | Evidence |
 |---|---|---|---|---|---|---|
 | 2026-02-16T17:52:54+06:00 | WBS-3.1 | IP | Team Orchestrator -> ai-ml-specialist + backend-lead | None | Implement moderation core + queue-safe execution | Branch `ihm/feat/ai-community-intelligence` ready; task packet created |
@@ -60,6 +61,7 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 | 2026-02-16T19:17:42+06:00 | WBS-3.3 / WBS-3.2 / WBS-1.4 (Team 3) | DN | frontend-lead + team-orchestrator | None | Sync root pointers and continue closeout | Workspace/mainspace merge conflict resolved on client by restoring Team 3 AI/community files in main branch commit `ef0a0b2`; `npm run build` passed in `advyon-client` and `advyon-server` |
 | 2026-02-16T19:20:55+06:00 | WBS-OPS-03 | DN | team-orchestrator | None | Remove transient worktree folder after reconciliation | Verified no unmerged commit divergence (`0/0`) between `worktrees/advyon-{server,client}` and main repos; removed `worktrees/` directory from root workspace |
 | 2026-02-16T19:49:54+06:00 | WBS-1.4 (Team 3) / WBS-SM-MVP-02 | DN | qa-testing-lead + team-orchestrator | None | Close previously logged execution blocker with explicit evidence mapping | Prior BL at `2026-02-16T19:18:00+06:00` resolved for Team 3 slice using deterministic schema checks + server/client build gates + handoff coverage matrix (`TEAM3_FORM_VALIDATION_COVERAGE.md`) |
+| 2026-02-16T19:49:54+06:00 | WBS-3.1 / WBS-3.2 / WBS-3.3 / WBS-3.4 / WBS-DEP-SV-02 / WBS-TD-SC-02 / WBS-SM-KPI-04 / WBS-SM-KPI-05 | DN | team-orchestrator | None | Normalize final Team 3 delivery state in execution timeline | Final statuses align with Team 3 DoD Snapshot and Master WBS board (`DN` for all Team 3-owned delivery rows) |
 
 ### Team 3 DoD Snapshot (Assigned Scope)
 | WBS ID | Team 3 Scope Status | Evidence |
