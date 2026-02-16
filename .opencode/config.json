@@ -1,0 +1,228 @@
+{
+  "name": "ai-fullstack-team",
+  "version": "2.0.0",
+  "description": "World-class AI software engineering team with specialized agents and orchestration (12-person complete team)",
+  "project": {
+    "type": "ai-web-application",
+    "stack": {
+      "frontend": ["nextjs", "react", "typescript", "tailwind"],
+      "backend": ["nodejs", "express", "typescript"],
+      "database": ["postgresql", "pgvector", "redis"],
+      "ai": ["openai", "anthropic", "langchain"],
+      "deployment": ["vercel", "docker"],
+      "testing": ["vitest", "playwright"]
+    }
+  },
+  "team": {
+    "size": 12,
+    "structure": "specialized-agents",
+    "coordination": "orchestrated",
+    "mode": "multi-agent",
+    "version": "2.0"
+  },
+  "agents": {
+    "orchestrator": {
+      "name": "orchestrator",
+      "mode": "orchestrate",
+      "description": "Central coordination hub",
+      "file": ".opencode/agents/orchestrator.md",
+      "enabled": true
+    },
+    "productManager": {
+      "name": "product-manager",
+      "mode": "plan",
+      "description": "Requirements and roadmap",
+      "file": ".opencode/agents/product-manager.md",
+      "enabled": true
+    },
+    "architect": {
+      "name": "architect",
+      "mode": "plan",
+      "description": "System design and standards",
+      "file": ".opencode/agents/architect.md",
+      "enabled": true
+    },
+    "aiEngineer": {
+      "name": "ai-engineer",
+      "mode": "build",
+      "description": "AI/ML integration",
+      "file": ".opencode/agents/ai-engineer.md",
+      "enabled": true
+    },
+    "frontendDev": {
+      "name": "frontend-dev",
+      "mode": "build",
+      "description": "UI/UX development",
+      "file": ".opencode/agents/frontend-dev.md",
+      "enabled": true
+    },
+    "backendDev": {
+      "name": "backend-dev",
+      "mode": "build",
+      "description": "API and business logic",
+      "file": ".opencode/agents/backend-dev.md",
+      "enabled": true
+    },
+    "devopsEngineer": {
+      "name": "devops-engineer",
+      "mode": "build",
+      "description": "Infrastructure and deployment",
+      "file": ".opencode/agents/devops-engineer.md",
+      "enabled": true
+    },
+    "securityEngineer": {
+      "name": "security-engineer",
+      "mode": "review",
+      "description": "Security reviews",
+      "file": ".opencode/agents/security-engineer.md",
+      "enabled": true
+    },
+    "qaTester": {
+      "name": "qa-tester",
+      "mode": "test",
+      "description": "Testing and QA",
+      "file": ".opencode/agents/qa-tester.md",
+      "enabled": true
+    },
+    "uiUxDesigner": {
+      "name": "ui-ux-designer",
+      "mode": "design",
+      "description": "User research and UI/UX design",
+      "file": ".opencode/agents/ui-ux-designer.md",
+      "enabled": true
+    },
+    "dataEngineer": {
+      "name": "data-engineer",
+      "mode": "build",
+      "description": "Analytics pipelines and data infrastructure",
+      "file": ".opencode/agents/data-engineer.md",
+      "enabled": true
+    }
+  },
+  "workflows": {
+    "featureDevelopment": {
+      "name": "feature-development",
+      "description": "End-to-end feature workflow (12 phases)",
+      "file": ".opencode/workflows/feature-development.md",
+      "phases": 12,
+      "duration": "1-3 weeks"
+    },
+    "sprintPlanning": {
+      "name": "sprint-planning",
+      "description": "Agile sprint ceremonies",
+      "file": ".opencode/workflows/sprint-planning.md",
+      "duration": "2 weeks"
+    },
+    "bugFixPipeline": {
+      "name": "bug-fix-pipeline",
+      "description": "Bug triage and resolution",
+      "file": ".opencode/workflows/bug-fix-pipeline.md",
+      "duration": "hours to days"
+    },
+    "deploymentWorkflow": {
+      "name": "deployment-workflow",
+      "description": "Production deployment",
+      "file": ".opencode/workflows/deployment-workflow.md",
+      "duration": "2-4 hours"
+    },
+    "codeReview": {
+      "name": "code-review",
+      "description": "Code review process",
+      "file": ".opencode/workflows/code-review.md",
+      "duration": "1-4 hours"
+    },
+    "systemDesign": {
+      "name": "system-design",
+      "description": "Architecture design",
+      "file": ".opencode/workflows/system-design.md",
+      "duration": "2-5 days"
+    },
+    "performanceOptimization": {
+      "name": "performance-optimization",
+      "description": "Performance tuning",
+      "file": ".opencode/workflows/performance-optimization.md",
+      "duration": "1-5 days"
+    },
+    "handoffManagement": {
+      "name": "handoff-management",
+      "description": "Work transition process",
+      "file": ".opencode/workflows/handoff-management.md"
+    }
+  },
+  "skills": {
+    "directory": ".opencode/skills",
+    "autoLoad": true,
+    "permissions": {
+      "*": "allow"
+    }
+  },
+  "orchestration": {
+    "enabled": true,
+    "handoffProtocol": "structured",
+    "qualityGates": [
+      "completeness",
+      "clarity",
+      "dependencies",
+      "review",
+      "quality"
+    ],
+    "metrics": {
+      "track": true,
+      "report": "daily"
+    }
+  },
+  "communication": {
+    "standups": {
+      "enabled": true,
+      "frequency": "daily",
+      "duration": "15 minutes"
+    },
+    "handoffs": {
+      "format": "markdown",
+      "location": "team-orchestration/handoffs/"
+    },
+    "statusUpdates": {
+      "frequency": "daily",
+      "format": "automated"
+    }
+  },
+  "quality": {
+    "gates": {
+      "requirements": true,
+      "architectureAndDesign": true,
+      "databaseSchema": true,
+      "codeReview": true,
+      "qaTesting": true,
+      "aiEthics": true,
+      "security": true,
+      "staging": true,
+      "postDeployment": true
+    },
+    "standards": {
+      "testCoverage": 80,
+      "securityScan": true,
+      "performanceBudget": true
+    }
+  },
+  "rules": {
+    "versionControl": {
+      "commitPolicy": {
+        "enabled": true,
+        "trigger": "fileCountThreshold",
+        "threshold": 3,
+        "description": "MANDATORY: All agents MUST commit changes after modifying 3 or more files. This rule applies consistently throughout the entire runtime.",
+        "strict": true,
+        "enforcement": "immediate",
+        "exceptions": [".gitignore", ".env", "*.log"],
+        "messageFormat": "{type}: {description} - {files_changed}",
+        "autoStage": true
+      },
+      "commitTypes": ["feat", "fix", "docs", "style", "refactor", "test", "chore"],
+      "skipCommitWarning": "WARNING: Commit skipped. This is against team policy. Please commit changes immediately.",
+      "batchCommits": false
+    }
+  },
+  "created": "2026-02-16",
+  "updated": "2026-02-16",
+  "version": "2.0"
+}
