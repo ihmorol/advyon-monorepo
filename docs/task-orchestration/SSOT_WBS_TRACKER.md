@@ -62,15 +62,16 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 | 2026-02-16T19:20:55+06:00 | WBS-OPS-03 | DN | team-orchestrator | None | Remove transient worktree folder after reconciliation | Verified no unmerged commit divergence (`0/0`) between `worktrees/advyon-{server,client}` and main repos; removed `worktrees/` directory from root workspace |
 | 2026-02-16T19:49:54+06:00 | WBS-1.4 (Team 3) / WBS-SM-MVP-02 | DN | qa-testing-lead + team-orchestrator | None | Close previously logged execution blocker with explicit evidence mapping | Prior BL at `2026-02-16T19:18:00+06:00` resolved for Team 3 slice using deterministic schema checks + server/client build gates + handoff coverage matrix (`TEAM3_FORM_VALIDATION_COVERAGE.md`) |
 | 2026-02-16T19:49:54+06:00 | WBS-3.1 / WBS-3.2 / WBS-3.3 / WBS-3.4 / WBS-DEP-SV-02 / WBS-TD-SC-02 / WBS-SM-KPI-04 / WBS-SM-KPI-05 | DN | team-orchestrator | None | Normalize final Team 3 delivery state in execution timeline | Final statuses align with Team 3 DoD Snapshot and Master WBS board (`DN` for all Team 3-owned delivery rows) |
+| 2026-02-16T21:56:59+06:00 | WBS-3.1 / WBS-3.2 / WBS-3.3 / WBS-3.4 / WBS-1.4 (Team 3) | DN | Team 3 remediation pod (security-engineer + frontend-lead + ai-ml-specialist) | None | Publish hardened post-audit remediation with regression evidence | Commits `e365747` (moderation hardening), `676d00d` (assist/category validation UX), `860c4b7` (dynamic AI tool history UX), `f3fa49e` (persistent context + personalization); server build + 5 jest suites pass; client build pass |
 
 ### Team 3 DoD Snapshot (Assigned Scope)
 | WBS ID | Team 3 Scope Status | Evidence |
 |---|---|---|
-| WBS-3.1 | DN | `feb5396`, moderation service/routes/tests + handoff report |
-| WBS-3.3 | DN | `3116ae4`, `362672d`, tool backend/UI/history/export |
-| WBS-3.4 | DN | `6246fc4`, legal context manager + injection guard tests |
-| WBS-3.2 | DN | `3116ae4`, `362672d`, community AI assist APIs + UX |
-| WBS-1.4 (Team 3 domain) | DN (team slice) | `feb5396`, `4febb0f`, `68c15a8`, validation coverage doc |
+| WBS-3.1 | DN | `feb5396`, `e365747`, moderation pipeline + stronger profanity defense + tests |
+| WBS-3.3 | DN | `3116ae4`, `362672d`, `860c4b7`, tools backend/UI/history/export with dynamic filters/search |
+| WBS-3.4 | DN | `6246fc4`, `f3fa49e`, legal context manager with persistent memory + personalization profile |
+| WBS-3.2 | DN | `3116ae4`, `362672d`, `676d00d`, community AI assist APIs + resilient UX error handling |
+| WBS-1.4 (Team 3 domain) | DN (team slice) | `feb5396`, `4febb0f`, `68c15a8`, `676d00d`, validation parity and category contract hardening |
 | WBS-DEP-SV-02 | DN | `feb5396`, moderation dependency and queue-safe runtime |
 | WBS-TD-SC-02 | DN | `feb5396`, centralized sanitizer integrated |
 | WBS-SM-MVP-02 (Team 3 domain) | DN (team slice) | Automated schema checks + build/test evidence in handoff docs |
@@ -86,10 +87,10 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 | WBS-1.4 | MVP | Teams 1-5 | IP | In Progress | Build Passed | Pending | Commit after >=3 files or logical unit | Team 3 scope DN: `feb5396`, `4febb0f`, `68c15a8`; other teams pending |
 | WBS-2.1 | MVP | Team 2 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-2.2 | MVP | Team 2 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-3.1 | Post-MVP | Team 3 | DN | Pass | Passed | Passed | Commit after >=3 files or logical unit | Commits `feb5396`, `ee6d9b6`; moderation pipeline + review/appeals + tests |
-| WBS-3.2 | Future | Team 3 | DN | Pass | Passed | Passed | Commit after >=3 files or logical unit | Commits `3116ae4`, `362672d`; optional/non-blocking community AI assistance delivered |
-| WBS-3.3 | Post-MVP | Team 3 | DN | Pass | Passed | Passed | Commit after >=3 files or logical unit | Commits `3116ae4`, `362672d`; tools backend/UI/history/export/limits delivered |
-| WBS-3.4 | Post-MVP | Team 3 | DN | Pass | Passed | Passed | Commit after >=3 files or logical unit | Commit `6246fc4`; legal-only context manager with prompt-injection defense and memory |
+| WBS-3.1 | Post-MVP | Team 3 | DN | Pass | Passed | Passed | Commit after >=3 files or logical unit | Commits `feb5396`, `e365747`, `ee6d9b6`; moderation pipeline + review/appeals + profanity hardening |
+| WBS-3.2 | Future | Team 3 | DN | Pass | Passed | Passed | Commit after >=3 files or logical unit | Commits `3116ae4`, `362672d`, `676d00d`; optional/non-blocking community AI assistance with resilient error UX |
+| WBS-3.3 | Post-MVP | Team 3 | DN | Pass | Passed | Passed | Commit after >=3 files or logical unit | Commits `3116ae4`, `362672d`, `860c4b7`; tools backend/UI/history/export/limits with dynamic history UX |
+| WBS-3.4 | Post-MVP | Team 3 | DN | Pass | Passed | Passed | Commit after >=3 files or logical unit | Commits `6246fc4`, `f3fa49e`; legal-only context manager with prompt-injection defense, persistent memory, and personalization |
 | WBS-4.1 | Post-MVP | Team 4 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-4.2 | Post-MVP | Team 4 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
 | WBS-5.1 | MVP | Team 4 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
