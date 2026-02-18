@@ -57,6 +57,11 @@ Interpretation: environment-level blockers are reduced, but quality/build-readin
   - Evidence:
     - `reports/all/strategy/api-smoke-matrix-2026-02-18.md` (`20/20` checks passed).
     - `reports/all/strategy/feature-flow-checklist-2026-02-18.md` (`27/27` checks passed).
+  - Client consumer parity remediations (minimum-safe):
+    - `useMessageStore` now uses server-compatible message endpoints (`/messages/pending/count`, `DELETE /messages/:id`) and robustly parses wrapped payloads.
+    - `useAnalyticsStore` now composes data from `/analytics/metrics/cases`, `/analytics/metrics/clients`, and `/analytics/metrics/deadlines` instead of non-existent `/analytics/overview`.
+    - Added dashboard-safe routes for `/dashboard/messages` and `/dashboard/messages/:messageId` to remove runtime navigation dead-ends.
+  - Verification refresh: `advyon-client` build re-run and passing after parity fixes.
 
 - Phase 4 Support (Data Readiness) - Completed
   - Added full reset development seeding utility: `advyon-server/scripts/seed.database.ts`.

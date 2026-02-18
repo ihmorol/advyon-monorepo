@@ -34,6 +34,9 @@ Verified in code:
 - Detailed model/reference analysis: `reports/all/strategy/server-model-reference-analysis-2026-02-18.md`.
 - Authenticated API smoke matrix: pass (`npx jest tests/smoke/api.smoke.test.ts --runInBand`) with 20/20 checks, evidence in `reports/all/strategy/api-smoke-matrix-2026-02-18.md`.
 - Feature workflow checklist: pass (`npx jest tests/smoke/feature-flow.smoke.test.ts --runInBand`) with 27/27 checks, evidence in `reports/all/strategy/feature-flow-checklist-2026-02-18.md`.
+- Client contract stabilization: fixed message and analytics client/store API paths to match server contracts (`/messages/pending/count`, `DELETE /messages/:id`, `/analytics/metrics/*`) and normalized response parsing in `useMessageStore`/`useAnalyticsStore`.
+- Dashboard route hardening: added `/dashboard/messages` and `/dashboard/messages/:messageId` routes to prevent runtime 404s from existing dashboard navigation.
+- Post-fix client build: pass (`npm run build`).
 
 ## Deferred/Unresolved by Decision
 

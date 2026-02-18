@@ -42,6 +42,8 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 - **Model analysis evidence:** server-side ID/reference mapping and constraints documented in `reports/all/strategy/server-model-reference-analysis-2026-02-18.md`.
 - **API smoke evidence:** authenticated smoke matrix (mocked auth principal mapped to seeded accounts) passed `20/20` in `reports/all/strategy/api-smoke-matrix-2026-02-18.md`.
 - **Feature flow checklist evidence:** seeded-account workflow matrix passed `27/27` in `reports/all/strategy/feature-flow-checklist-2026-02-18.md` covering case/schedule/message/notification/admin/billing role-gates.
+- **Client parity refresh:** message and analytics client stores now align with live server routes (`/messages/pending/count`, `DELETE /messages/:id`, `/analytics/metrics/*`) and parse wrapped response payloads correctly.
+- **Navigation hardening:** dashboard message navigation now has non-breaking routes (`/dashboard/messages`, `/dashboard/messages/:messageId`) to avoid 404 dead-ends during operational flows.
 
 ## Team 3 Task Packet and Execution Log
 
@@ -118,8 +120,8 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 | WBS-5.5 | MVP | Team 1 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | Secure download + batch endpoints merged; server document tests passing, security/manual evidence pending |
 | WBS-6.1 | Post-MVP | Team 4 | IP | In Progress | In Progress | Pending | Commit after >=3 files or logical unit | Schedule backend ID-reference bug fixed (`schedule.service.ts`), API smoke route passes; UI/manual runtime evidence pending |
 | WBS-7.1 | MVP | Team 4 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-7.2 | MVP | Team 4 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | Messaging backend ID handling fixed (`message.service.ts`); send/read/star/archive flow passes in feature checklist |
-| WBS-8.1 | Post-MVP | Team 4 | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | Analytics backend merged; metrics API smoke route passes, dashboard/export manual validation pending |
+| WBS-7.2 | MVP | Team 4 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | Messaging backend ID handling fixed (`message.service.ts`); client store contract parity fixed (`useMessageStore.js`), and send/read/star/archive flow passes in feature checklist |
+| WBS-8.1 | Post-MVP | Team 4 | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | Analytics backend merged; client now consumes `/analytics/metrics/*` via `useAnalyticsStore.js`; metrics smoke route passes, dashboard/export manual validation pending |
 | WBS-8.1-FUT | Future | Team 4 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
 | WBS-9.1 | MVP | Team 4 | IP | In Progress | In Progress | Pending | Commit after >=3 files or logical unit | Notification ID-reference bug fixed (`notification.service.ts`), API smoke route passes; real Clerk-token E2E channel evidence pending |
 | WBS-10.1 | MVP | Team 2 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
