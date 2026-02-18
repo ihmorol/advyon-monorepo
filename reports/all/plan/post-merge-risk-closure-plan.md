@@ -56,12 +56,21 @@ Interpretation: environment-level blockers are reduced, but quality/build-readin
     - `message.service.ts` now resolves business `caseId` values before ObjectId usage in create-thread flows.
   - Evidence:
     - `reports/all/strategy/api-smoke-matrix-2026-02-18.md` (`20/20` checks passed).
-    - `reports/all/strategy/feature-flow-checklist-2026-02-18.md` (`27/27` checks passed).
+    - `reports/all/strategy/feature-flow-checklist-2026-02-18.md` (latest rerun: `26/27` passed; billing checkout check returned `500`).
   - Client consumer parity remediations (minimum-safe):
     - `useMessageStore` now uses server-compatible message endpoints (`/messages/pending/count`, `DELETE /messages/:id`) and robustly parses wrapped payloads.
     - `useAnalyticsStore` now composes data from `/analytics/metrics/cases`, `/analytics/metrics/clients`, and `/analytics/metrics/deadlines` instead of non-existent `/analytics/overview`.
     - Added dashboard-safe routes for `/dashboard/messages` and `/dashboard/messages/:messageId` to remove runtime navigation dead-ends.
   - Verification refresh: `advyon-client` build re-run and passing after parity fixes.
+  - Additional remediation batch (client workflow + ACL hardening):
+    - Case-access backend normalized to real auth payload and identifiers (`req.user.userId`, business-ID/ObjectId resolution, owner/admin authorization on share/list/revoke).
+    - Case list search filter now preserves ownership/shared access scope (no search-based visibility bypass).
+    - Document direct endpoints now enforce membership checks before returning status/content/details or processing summary updates/download links.
+    - Clients UI now executes invite-existing flow with case assignment and revoke-access action from the dashboard clients page.
+  - Verification refresh:
+    - `advyon-server` build: pass.
+    - Targeted server suites: pass (`case.test.ts`, `document.test.ts`, 15/15).
+    - `advyon-client` build: pass.
 
 - Phase 4 Support (Data Readiness) - Completed
   - Added full reset development seeding utility: `advyon-server/scripts/seed.database.ts`.

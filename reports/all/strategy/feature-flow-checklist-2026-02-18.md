@@ -30,10 +30,10 @@
 | Billing | Client current subscription | 200 | 200 | PASS |
 | Billing | Client payment history | 200 | 200 | PASS |
 | Billing | Admin payment history (all) | 200 | 200 | PASS |
-| Billing | Client checkout session path | 503 | 503 | PASS |
+| Billing | Client checkout session path | 500 | 200 | FAIL |
 | Role Gate | Client blocked from admin users | 403 | 403 | PASS |
 | Role Gate | Client blocked from notification send-test | 403 | 403 | PASS |
 
 - Total checks: 27
-- Passed: 27
-- Failed: 0
+- Passed: 26
+- Failed: 1

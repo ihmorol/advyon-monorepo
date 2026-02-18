@@ -33,10 +33,13 @@ Verified in code:
 - Seeder execution: pass (`npm run seed:db`) on development database; references validated with zero mismatches and seeded through the three provided accounts.
 - Detailed model/reference analysis: `reports/all/strategy/server-model-reference-analysis-2026-02-18.md`.
 - Authenticated API smoke matrix: pass (`npx jest tests/smoke/api.smoke.test.ts --runInBand`) with 20/20 checks, evidence in `reports/all/strategy/api-smoke-matrix-2026-02-18.md`.
-- Feature workflow checklist: pass (`npx jest tests/smoke/feature-flow.smoke.test.ts --runInBand`) with 27/27 checks, evidence in `reports/all/strategy/feature-flow-checklist-2026-02-18.md`.
+- Feature workflow checklist: latest rerun reports 26/27 checks passing, with one billing checkout failure (`500`) in `reports/all/strategy/feature-flow-checklist-2026-02-18.md`.
 - Client contract stabilization: fixed message and analytics client/store API paths to match server contracts (`/messages/pending/count`, `DELETE /messages/:id`, `/analytics/metrics/*`) and normalized response parsing in `useMessageStore`/`useAnalyticsStore`.
 - Dashboard route hardening: added `/dashboard/messages` and `/dashboard/messages/:messageId` routes to prevent runtime 404s from existing dashboard navigation.
 - Post-fix client build: pass (`npm run build`).
+- Client management workflow activation: `ClientsPage` now supports invite-existing flow (`email + case`) through `/case-access/share`, and remove-access action through `/case-access/:caseId/:userId`.
+- Access-control remediations: fixed case search access leak (search now preserves owner/shared scope) and added document direct-route membership checks for read/status/content/summary/download paths.
+- Verification refresh: `advyon-server` build passes, targeted case/document service tests pass (15/15), `advyon-client` build passes.
 
 ## Deferred/Unresolved by Decision
 
