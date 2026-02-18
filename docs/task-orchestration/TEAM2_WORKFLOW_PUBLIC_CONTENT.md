@@ -1,7 +1,7 @@
 # Team 2 Workflow - Public Experience, Content, and Metadata
 
 ## Branch and Ownership
-- Branch: `team2/public-content-metadata`
+- Branch: `msi/feat/public-content-metadata`
 - Segment `2.1` Branch: `team2.1/public-static-pages`
 - Segment `2.2` Branch: `team2.2/public-remaining-scope`
 - Primary skills: `ui-ux-designer`, `product-manager`, `frontend-lead`, `backend-lead`
@@ -21,7 +21,7 @@
 - Do not modify Team 1/3/4/5 modules except contract adapters.
 
 ## Device and GitHub Execution Rules
-- Start each session with: `git fetch origin --prune`, `git checkout team2/public-content-metadata`, `git pull --rebase origin team2/public-content-metadata`.
+- Start each session with: `git fetch origin --prune`, `git checkout msi/feat/public-content-metadata`, `git pull --rebase origin msi/feat/public-content-metadata`.
 - Work only in Team 2 owned paths unless orchestrator approves a cross-team contract change.
 - Build a Task Packet for each WBS item (scope, contracts, test plan, rollback) before code edits.
 - Push at least every 4 hours and update SSOT evidence links in the same cycle.

@@ -1,7 +1,7 @@
 # Team 5 Workflow - Admin, Commerce, and Governance
 
 ## Branch and Ownership
-- Branch: `team5/admin-commerce-governance`
+- Branch: `ab/feat/admin-commerce-governance`
 - Primary skills: `security-engineer`, `backend-lead`, `devops-engineer`, `qa-testing-lead`
 - Agent roles: backend-dev, frontend-dev, security-engineer, devops-engineer, qa-tester, data-engineer
 
@@ -16,7 +16,7 @@
 - Team 5 consumes Team 3 moderation and Team 4 analytics through stable API contracts only.
 
 ## Device and GitHub Execution Rules
-- Start each session with: `git fetch origin --prune`, `git checkout team5/admin-commerce-governance`, `git pull --rebase origin team5/admin-commerce-governance`.
+- Start each session with: `git fetch origin --prune`, `git checkout ab/feat/admin-commerce-governance`, `git pull --rebase origin ab/feat/admin-commerce-governance`.
 - Team 5 owns repository governance and must enforce branch safety for all teams.
 - Build a Task Packet for each WBS item (scope, contracts, test plan, rollback) before code edits.
 - Push at least every 4 hours and update SSOT evidence links in the same cycle.

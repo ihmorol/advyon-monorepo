@@ -25,7 +25,7 @@
 - Do not modify public pages, AI policy engine, or payment/admin modules.
 
 ## Device and GitHub Execution Rules
-- Start each session with: `git fetch origin --prune`, `git checkout team4/core-practice-operations`, `git pull --rebase origin team4/core-practice-operations`.
+- Start each session with: `git fetch origin --prune`, `git checkout sif/feat/core-practice-operations`, `git pull --rebase origin sif/feat/core-practice-operations`.
 - Work only in Team 4 owned paths unless orchestrator approves a cross-team contract change.
 - Build a Task Packet for each WBS item (scope, contracts, test plan, rollback) before code edits.
 - Push at least every 4 hours and update SSOT evidence links in the same cycle.
