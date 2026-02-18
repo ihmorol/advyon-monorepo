@@ -1,42 +1,29 @@
 # Cross-Repo Merge Strategy & SSOT Coverage
 
-## Key Cross-Cutting Issues
-1. **Router Alignment (Client) vs API Registration (Server)**  
-   - Client routes for Document Viewer, AI Tools, Admin, Billing rely on matching server endpoints.  
-   - Server routes (`/documents`, `/ai/tools`, `/admin`, `/subscriptions`) must ship before UI toggles flip.  
-   - **Handling:** Router merge sequence tracked inside `reports/advyon-client/plan/merge-worklist.md`; each route stays behind existing feature flags until server readiness is confirmed via manual verification matrix.
-2. **Document Download Contract**  
-   - Client `useDocumentDownload` expects `/documents/:caseId/:documentId/download` plus `/documents/batch-download`.  
-   - **Handling:** Tagged as blocker for Team 1 WBS-5.3/5.4/5.5. Client/server foundation branches will merge simultaneously, followed by manual preview/download checks logged in SSOT.
-3. **AI Tooling**  
-   - `AIToolsPage` + stores call `/ai/tools/history`, `/ai/tools/export`, `/ai/tools/run`.  
-   - **Handling:** Keep AI Tools UI disabled until server AI branch completes verification (Team 3 playbook). After merge, capture evidence for WBS-3.2/3.3 (client) and KPI endpoints (server) before loosening flags.
-4. **Admin & Billing**  
-   - Client AdminPanel/Billing depend on `/admin/*`, `/subscriptions/*`, `/payments/*`, `/admin/settings`, `/payment/webhook`.  
-   - **Handling:** Governance branch must land first; then enable `systemSettings.features.billing/admin` and execute billing/admin QA scripts from manual-verification doc before exposing UI broadly.
-5. **Operations Features**  
-   - Client currently lacks UI for schedule/notification even though dependencies are queued.  
-   - **Handling:** Leave dependencies unmerged until Team 4 scope is ready or explicitly revert; SSOT Team 4 rows stay `NS` with note referencing this decision.
-6. **Validation & Schema Sync**  
-   - Client Zod schemas for auth/doc/community require server parity.  
-   - **Handling:** SSOT WBS-1.4/SM-MVP-02 remain `IP`; record deviations + blockers per team subrows until parity validated.
-7. **Testing Gaps**  
-   - Backend operations/admin modules lack automation; client document/admin UI also untested.  
-   - **Handling:** Map each gap to WBS-TD entries (CQ/TS/SC). Create follow-up tickets for DocumentAdapter unit tests, Admin/Billing UI tests, and new server suites.
+## Key Cross-Cutting Issues (Status 2026-02-18)
+| Risk | Status | Notes / Mitigation |
+| --- | --- | --- |
+| Router alignment vs API registration | Mitigated - verification pending | Client router (`advyon-client/src/routes/index.jsx`) and server router (`advyon-server/src/app/routes/index.ts`) both expose Document Viewer, AI Tools, Admin, Billing, and Schedule routes. Manual regression remains open until lint/build/test succeed. |
+| Document download contract | Implemented - needs QA evidence | `useDocumentDownload` plus the new viewer components call `/documents/:caseId/:documentId/download` and `/documents/batch-download`, which now exist server-side. Manual preview/download and audit-log checks must still run per Team 1 playbook. |
+| AI tooling | Feature flagged - tests blocked | UI + stores (`AIToolsPage`, `useAIStore`, `useCommunityStore`) consume `/ai/tools/*` routes backed by the new AI modules. Leave feature flags enabled until Vitest/Jest executions produce logs and privacy controls ship. |
+| Admin & billing | Code merged - blocked by missing deps | Client admin/billing flows and server modules (`admin`, `payment`, `subscription`, `stripe.config.ts`) compile logically, but `npm install` cannot pull `stripe/node-cron/uuid`, so `tsc` and Stripe webhook drills cannot run. |
+| Operations features | Server ready - client UI limited | Schedule/notification/message/personalization modules exist on the server; client only has dependency scaffolding. Keep operations UI hidden behind feature flags and validate via Postman before release. |
+| Validation & schema sync | Schemas aligned - parity unproven | Auth/document/community Zod schemas exist on the client and matching validators exist server-side; lint/build blockers prevent attaching schema test output to WBS-1.4/SM-MVP-02. |
+| Testing gaps & tooling constraints | High risk | React 19 ESLint (client) and Jest/eslint (server) fail; Vite requires Node >=22.12 and `npm install` fails with `EACCES`. No automated evidence is available yet. |
 
-## SSOT Tracker Hooks (Updated)
-- Team 1 rows (WBS-1.2/1.3/5.3/5.4/5.5) now reference the merge plan. Status stays `NS`, notes cite `reports/advyon-client/plan/merge-worklist.md` to show prep work.  
-- WBS-1.4 + WBS-SM-MVP-02 remain `IP` with explicit note: “Team 3 done; Team 1/2/4 pending schema parity per plan.”  
-- Team 2 WBS-10.x rows reference branch-status plan; still `NS`.  
-- Team 5 WBS-11.1 & 12.1 note that governance/Stripe work depends on admin branch plan.  
-- Program OPS tasks keep `NS` but mention CODEOWNERS/PR template pending in admin branch.
+## SSOT Tracker Hooks
+- Team 1 rows (WBS-1.2/1.3/5.3/5.4/5.5) can move from `NS` to `IP` once lint/build/test output is attached; for now, notes link to `reports/advyon-client/plan/merge-worklist.md` plus the verification blockers above.
+- WBS-1.4 and WBS-SM-MVP-02 stay `IP` with updated notes: “Client + server schemas merged; awaiting evidence after tooling fixes.”
+- Team 2 WBS-10.x rows remain `NS`. Plan is unchanged because no public-site code landed in this cycle.
+- Team 5 (admin/billing) rows cite the governance branch plan and explicitly call out the `npm install` failure that is blocking Stripe verification.
+- Program OPS tasks now reference the merged CODEOWNERS/PR template from the admin branch but remain `NS` until branch protections and cadence enforcement flip on.
 
-## Merge Execution Order (Recommended)
-1. Merge foundation branches (client + server) ? run document/auth regression + download contract tests.  
-2. Merge AI branches (client + server) ? execute Team 3 manual suite + jest targets.  
-3. Merge operations server branch ? hold client dependency commit until UI ready; validate schedule/notification APIs via Postman scripts.  
-4. Merge admin/billing (server first) ? configure Stripe/webhooks, then enable client UI and run billing/admin QA.  
-5. After each wave, reconcile package locks, rerun `npm run build` / targeted tests, and update SSOT evidence links.
+## Merge Execution Order (Progress)
+1. Foundation (client/server) – Code merged. Pending actions: fix lint errors, unblock `npm run build`, execute document preview/download manual suite, attach logs to WBS-5.3/5.4/5.5.
+2. AI (client/server) – Code merged. Pending actions: run Vitest + Jest suites, capture AI moderation/tooling manual evidence, implement privacy retention controls before widening rollout.
+3. Operations (server) – Code merged on the backend with schedule/notification/message modules. Client UI remains feature-flagged until manual API validation is recorded.
+4. Admin/Billing (server -> client) – Code merged across both repos, but missing npm dependencies prevent Stripe/webhook validation. Do not expose billing/admin toggles until `npm install`, `tsc`, and manual QA complete.
+5. Post-wave housekeeping – Package-lock reconciliation, lint/build/test reruns, and SSOT updates are blocked by the tooling issues listed in the verification snapshot.
 
 ## Post-Merge Validation Matrix
 | Flow | Client Verification | Server Verification | Evidence Target |
@@ -50,6 +37,7 @@
 | Schedule/Notifications | (Future UI) confirm API contract via mock client | `/schedule/*` + `/notifications/*` CRUD tests | WBS-6.1/9.1 |
 
 ## Outstanding Questions / Clarifications Needed
-- Confirm whether remote fetch access can be restored; otherwise plan manual patching for latest commits.  
-- Decide whether to hold operations deps or fast-follow UI work; document decision in Team 4 SSOT notes.  
-- Align on automated test strategy for new UI/modules (DocumentAdapter, AdminPanel, Billing, operations APIs) and capture it as follow-up tasks.
+- When can we upgrade the Node runtime (>=22.12) so Vite builds and Vitest runs complete locally?
+- Who can unblock `npm install` for the server (EACCES when downloading `stripe`/`uuid`)? Without that fix, TypeScript cannot compile and Stripe webhooks cannot be tested.
+- Do we need interim manual evidence for operations APIs before the client UI is built, or will we hold the feature set entirely until the dashboard work lands?
+- What is the agreed automation strategy for new UI/modules (DocumentAdapter, AdminPanel, Billing, schedule APIs) once tooling stabilizes?

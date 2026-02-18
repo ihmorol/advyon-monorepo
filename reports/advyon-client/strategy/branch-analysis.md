@@ -18,7 +18,7 @@
 | `src/features/documents/components/DocumentAdapter.jsx`, `DocumentErrorBoundary.jsx`, `PDFViewer.jsx`, `DocumentViewerPage.jsx`, `src/features/documents/index.js` | Complete rewrite of viewer, MIME detection, download path, skeleton UI. | - Requires `/documents/:id/content` + `/download` endpoints ready.  <br/>- Large-file gate might block legitimate preview if size metadata missing.  <br/>- DocumentViewer now depends on `DocumentAdapter`; ensure tree-shaking retains it. | No automated rendering tests for new adapter/boundary; rely on manual QA. |
 | `src/features/onboarding/components/OnboardingFlow.jsx` | Aligns onboarding with new Zod schemas. | Must ensure server accepts new roles/fields; check for backward compatibility. | No form validation tests verifying schema wiring. |
 | `src/features/workspace/components/WorkspaceView.jsx` | Dynamic folder derivation, preview autoload, integrates DocumentErrorBoundary/PDF viewer. | Relies on `fetchDocumentContent` returning URL; error handling logs only. Might over-fetch causing load spikes. | No tests verifying folder logic or new preview effect. |
-| `src/hooks/__tests__/useAuthApi.test.js` | Adds coverage for retry logic. | Good coverage but requires Vitest environment (known to fail locally). | Test depends on `@testing-library/react-hooks` (deprecated) — consider future-proof replacement. |
+| `src/hooks/__tests__/useAuthApi.test.js` | Adds coverage for retry logic. | Good coverage but requires Vitest environment (known to fail locally). | Test depends on `@testing-library/react-hooks` (deprecated)  consider future-proof replacement. |
 | `src/hooks/useAuthApi.js` | Adds retry/backoff logic (`syncUserWithRetry`). | Must merge alongside DashboardLayout; otherwise undefined hook usage. Backoff uses global timers; ensure cleanup. | Covered by new tests; still lacking integration test with Clerk. |
 | `src/hooks/useDocumentDownload.js` | Implements download/batch download with progress and cancellation. | Assumes `/documents/{caseId}/{docId}/download` returns `downloadUrl`; server branch must provide. Without AbortController support in older browsers, cancel may fail silently. | No hook tests verifying progress/cancel; heavy reliance on manual QA. |
 | `src/layouts/DashboardLayout.jsx` | Uses `syncUserWithRetry`, new retry UI, onboarding fallback. | Must ensure `syncUserWithRetry` imported; if not, runtime crash. | No component/unit tests covering error fallback states. |
@@ -31,6 +31,12 @@
 - No documentation updates accompany the new hooks/components; add to `/docs` later.
 - Several imports assume absolute alias (`@/`); ensure tsconfig/vite config remains aligned after merges.
 - Manual QA checklist required for document viewer: PDF, image, office, unsupported types, large file gate, download fallback.
+
+#### Merge Outcome & Follow-ups (2026-02-18)
+- Router, viewer stack, store telemetry, and Zod schemas are merged on `ihm/fix/merge-teamwork`; see `advyon-client/src/routes/index.jsx`, `src/features/documents/components/*`, `src/store/documents.js`, and `src/lib/validation/*.js`.
+- `cmd /c npm run lint` now fails with 118 React 19 errors (unused `motion`, `react-refresh/only-export-components`, hook purity). Tasks: audit component exports, memoize expensive hooks, and add missing dependency arrays.
+- `cmd /c npm run build` refuses to run under Node v22.11.0; upgrade to >=22.12 or drop to LTS 20.19+ before attempting bundle verification or Vitest runs.
+- Manual verification from the Team 1 checklist (auth providers, preview/download, upload guard) remains unexecuted; capture evidence once the build/test toolchain stabilizes.
 
 ## `ihm/feat/ai-community-intelligence`
 
@@ -52,6 +58,11 @@
 - Need documentation for feature flags (env `VITE_AI_TOOL_*`).
 - Performance risk: history grouping runs on every render; memoization exists but relies on stable dependencies.
 
+#### Merge Outcome & Follow-ups (2026-02-18)
+- `AIToolsPage`, community schemas/stores, and Vitest specs exist in-tree; router wires `/dashboard/ai-assistant` via `RouteErrorBoundary`.
+- Feature flags should stay in place until `cmd /c npx vitest run ...` and backend Jest suites succeed (current state: Vitest cannot start because Vite build fails, and Jest cannot spawn workers). Capture logs for WBS-3.2/3.3/3.4 once tooling issues resolve.
+- Privacy retention + opt-out controls noted in branch-status/team3-ai.md are still outstanding; add backlog tickets or fast-follow PRs before global enablement.
+
 ## `sif/feat/core-practice-operations`
 
 ### Scope Overview
@@ -60,6 +71,11 @@
 ### Notes
 - Ensure tree-shaking and bundle impact reviewed; no UI changes yet so dead deps possible until corresponding components land.
 - After merge, run `npm install` and check `npm audit` for new vulnerabilities.
+
+#### Merge Outcome & Follow-ups (2026-02-18)
+- Dependency set (FullCalendar, Recharts, socket.io-client) is merged and present in `node_modules`.
+- Vite build cannot start under Node v22.11.0, so bundle-size checks and linting for new imports are pending. Re-run once Node >=22.12 is available.
+- No dashboard UI shipped for operations yet; coordinate with backend owners before introducing schedule/notification components to avoid contract drift.
 
 ## `ab/feat/admin-commerce-governance`
 
@@ -82,7 +98,12 @@
 
 ### Additional Observations
 - Need documentation (docs folder) for new admin/billing flows and feature flags.
-- CODEOWNERS addition may conflict with other branch’s governance updates—plan to merge carefully.
+- CODEOWNERS addition may conflict with other branch governance updates; coordinate merges carefully.
+
+#### Merge Outcome & Follow-ups (2026-02-18)
+- `AdminPanelPage.jsx`, `BillingPage.jsx`, `src/components/Sidebar.jsx`, and services under `src/services/{admin,billing}` are merged; `.env` includes `VITE_STRIPE_PUBLISHABLE_KEY`.
+- Client lint/build blockers (React 19 + Node version) remain; Billing/Admin UI cannot be considered production-ready until ESLint passes and Vite builds.
+- Server dependency install fails (`npm install` cannot fetch `stripe/node-cron/uuid`), so Stripe SDK is unavailable for end-to-end QA. Keep billing/admin feature flags disabled until server tooling is fixed and manual scripts in `reports/branch-status/manual-verification.md` execute successfully.
 
 ---
 

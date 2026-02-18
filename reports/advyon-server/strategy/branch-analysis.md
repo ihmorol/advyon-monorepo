@@ -15,6 +15,12 @@
 | `src/app/modules/case/case.route.ts` | Adds middleware + cleanup formatting. | Need to ensure duplicate route definitions (upload at bottom) are consistent; double registration risk. | No route tests. |
 | `src/app/modules/document/document.controller.ts/.service.ts/.validation.ts/.route.ts` | Implements signed content fetching, download endpoint, batch download, improved validation. | relies on `DocumentService` to stream from storage; ensure Cloudinary credentials accessible. Batch download returns URL list but no rate limiting. | No new tests for controller/service; high-risk functions. |
 
+#### Merge Outcome & Follow-ups (2026-02-18)
+- `fileUploadSecurity` and the new document download/batch routes are merged in `src/app/modules/{case,document}`.
+- `cmd /c npm run lint` now surfaces 577 errors across the server (numerous `no-explicit-any`, missing Jest globals).
+- `cmd /c npm run build` cannot run because `npm install` failed to download `stripe`, `node-cron`, and `uuid`; TypeScript cannot resolve those modules.
+- Targeted Jest suites for uploads/downloads have not run; `cmd /c npm run test` fails with `spawn EPERM`.
+
 ## `ihm/feat/ai-community-intelligence`
 
 ### Scope Overview
@@ -32,6 +38,11 @@
 ### Additional Observations
 - New dependencies introduced via package-lock (TensorFlow libs?). Need to verify install footprint.
 - Ensure environment has necessary GPU/CPU support; fallback path defined? (check service). Possibly heavy build times.
+
+#### Merge Outcome & Follow-ups (2026-02-18)
+- AI routes, services, and tests are merged, but Jest cannot start (`cmd /c npm run test` fails with `spawn EPERM`), so none of the new suites have executed.
+- ESLint reports extensive `no-explicit-any` usage across AI/community modules; remediation is required before promoting the branch.
+- Infrastructure dependencies (TensorFlow, OpenRouter API keys) remain unverified until `npm install` issues are resolved.
 
 ## `sif/feat/core-practice-operations`
 
@@ -52,6 +63,11 @@
 ### Additional Observations
 - No documentation/test artifacts despite wide surface area. Regression risk high.
 
+#### Merge Outcome & Follow-ups (2026-02-18)
+- Schedule, notification, messaging, personalization, analytics, socket, and archive scheduler modules are merged, but no automated tests or cron dry runs have executed.
+- Missing dependencies from `npm install` (notably `node-cron`) block TypeScript builds and runtime validation of the archive scheduler.
+- Manual API verification for schedule/notification flows remains outstanding; capture Postman or curl logs before enabling related client features.
+
 ## `ab/feat/admin-commerce-governance`
 
 ### Scope Overview
@@ -71,6 +87,11 @@
 ### Additional Observations
 - Stripe integration demands secure secret management; ensure `.env` guidance updated.
 - Lacks automated tests for critical payment flow; plan test backlog.
+
+#### Merge Outcome & Follow-ups (2026-02-18)
+- Governance artifacts (CODEOWNERS, PR template) and admin/payment/subscription modules are merged, but `npm install` cannot download `stripe`, so the Stripe SDK is unavailable.
+- `cmd /c npm run build` fails because `stripe`, `node-cron`, and `uuid` cannot be resolved; `cmd /c npm run lint` highlights widespread `no-explicit-any` usage in payment/webhook controllers.
+- Stripe webhook drills and admin/billing manual QA must remain blocked until dependencies install and Jest/eslint are green.
 
 ---
 

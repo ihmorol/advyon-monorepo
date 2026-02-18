@@ -1,4 +1,4 @@
-﻿# Team 1 – Foundation & Document Reliability
+# Team 1 - Foundation & Document Reliability
 
 ## Branch Identity
 - Workflow doc branch: `sro/feat/foundation-document-reliability`
@@ -7,45 +7,41 @@
 - Code areas: auth flows, onboarding hooks, dashboard document views, server document module
 
 ## Current Status (2026-02-18)
-- No local branch beyond `master` and `ihm/feat/ai-community-intelligence`; Team 1 branch has not been pulled down yet.
-- SSOT rows for WBS-1.2, WBS-1.3, WBS-1.4 (Team 1 slice), WBS-5.3/5.4/5.5, and Team 1-owned tech-debt/testing/security tickets remain `NS` (not started).
-- No build/test evidence recorded for Team 1 scope; Task Packets still need creation before coding.
+- Client and server code for the foundation branch are merged into `ihm/fix/merge-teamwork` (see `advyon-client/src/routes/index.jsx`, `src/features/documents/components/*`, `src/hooks/useAuthApi.js`, and `advyon-server/src/app/middlewares/fileUploadSecurity.ts`).
+- Verification is blocked: `cmd /c npm run lint` (client) reports 118 React 19 errors, `cmd /c npm run build` refuses to run under Node v22.11.0, and server `npm install` fails to download `stripe/node-cron/uuid`, preventing `tsc` and Jest from executing.
+- SSOT rows should remain `IP` until lint/build/test logs and manual evidence are attached; feature flags for risky UI (document viewer, download flows) remain enabled.
 
 ## Completed Work to Date
-- None. No commits or SSOT evidence exist for Team 1 deliverables.
+- Route error boundaries now wrap Workspace, Document Viewer, Text Review, AITools, Admin, and Billing (`advyon-client/src/routes/index.jsx`).
+- Document viewer stack landed (DocumentAdapter, DocumentErrorBoundary, PDFViewer) plus the download hook (`src/hooks/useDocumentDownload.js`) and telemetry updates in `src/store/documents.js`.
+- Auth resiliency (`syncUserWithRetry` in `src/hooks/useAuthApi.js` + `DashboardLayout.jsx`) and Zod schemas for auth/document flows (`src/lib/validation/*.js`).
+- Server-side security additions: `fileUploadSecurity` middleware and new download/batch-download endpoints in `src/app/modules/document/*` and `case.route.ts`.
 
 ## Outstanding Scope Summary
-1. **Authentication and Validation**
-   - Remove GitHub identity option from Clerk UI without touching backend provider config (WBS-1.2).
-   - Harden login sync with retries, graceful failure UI, and onboarding fallback (WBS-1.3).
-   - Apply full Zod coverage across auth/onboarding/document forms, with shared schema parity on server (Team 1 slice of WBS-1.4 & WBS-SM-MVP-02).
-2. **Document Experience**
-   - Fix Workspace document preview (loading states, mobile layout, error boundary) – WBS-5.3.
-   - Complete document preview page (multi-type adapters, print/share/version) – WBS-5.4.
-   - Implement secure downloads (signed URLs, batch queue, progress UI) – WBS-5.5.
-3. **Quality & Safety Backlog**
-   - Standardize API error envelopes, loading states, and route-level error boundaries (WBS-TD-CQ-01/02/03).
-   - Add unit tests for auth/doc utilities and file upload security controls (WBS-TD-TS-01, WBS-TD-SC-03).
-   - Close Team 1 owned critical bugs and document upload KPI instrumentation (WBS-SM-MVP-01, WBS-SM-KPI-03).
+1. **Verification Debt** - Fix React 19 ESLint errors, upgrade Node to >=22.12 (or 20.19 LTS) so Vite builds and Vitest can run, and capture lint/build/test logs for WBS-1.2/1.3/5.3/5.4/5.5.
+2. **Server Dependency Install** - Resolve `npm install` EACCES errors so `stripe/node-cron/uuid` install; rerun `npm run lint`, `npm run build`, and targeted Jest for document uploads/downloads.
+3. **Manual Evidence** - Execute the auth/document manual suites (providers, preview, download security, upload guards) and attach artifacts plus server log excerpts.
+4. **Telemetry/Test Coverage** - Add store/hooks tests for the new download hook, telemetry, and retry logic; current coverage relies solely on manual QA.
 
 ## Concerns / Risks Before Merge
-- Document viewer stack (`features/messages/components/MessageThread.jsx` and several document server modules) is missing per Master Task Breakdown; Team 1 must create these artifacts instead of assuming they exist.
-- Download endpoints introduce security risk: must enforce signed URLs, expirations, and audit logs before exposing batch download.
-- Auth sync errors block dashboard entry; until WBS-1.3 ships, onboarding remains brittle.
-- Shared validation initiative (WBS-1.4) cannot be marked done for the program until Team 1 completes its slice; coordinate schema boundaries with other teams.
+- Lint/build blockers prevent regression detection; shipping without resolving React 19 ESLint errors risks runtime issues (`react-refresh/only-export-components`, hook purity warnings).
+- Server dependency installation failure means Stripe SDK and cron scheduler are missing, so document download KPI logging and upload guard monitoring cannot be exercised end-to-end.
+- Manual verification remains outstanding; without evidence QA cannot close WBS-5.3/5.4/5.5.
+- Shared validation remains unproven; if server schemas diverge while tooling is broken, client-side Zod may reject valid payloads.
 
 ## Manual Verification Plan
-1. **Auth Providers** – Remove GitHub UI button, verify Google/email flows still render; run through Clerk staging env.
-2. **Login Sync Resilience** – Force sync failure (simulate API 500) and confirm retry with capped backoff, user-facing error, and fallback route.
-3. **Zod Validation Coverage** – For each Team 1 form (sign in/up, onboarding, document upload, metadata edits) confirm client+server schema rejects invalid input with matching messages.
-4. **Workspace Document Preview** – Test PDF/Docx/Images, large files, offline mode, and mobile viewport; verify loading skeleton and error boundary behavior.
-5. **Document Page UX** – Exercise print/share/version panels and fallback download path for unsupported file types.
-6. **Download Security** – Attempt to reuse expired signed link, ensure denial is logged; run batch download progress/resume flows.
-7. **Upload Security** – Upload blocked MIME types and oversized files to confirm rejection + audit entry.
-8. **Unit/Integration Tests** – `npm run build` + Team 1 jest suite (auth/doc modules once implemented).
+1. **Auth providers** - Remove GitHub button, exercise email + Google sign in/out, capture Clerk console logs.
+2. **Login sync resilience** - Simulate API failure, observe retry/backoff, confirm fallback onboarding route and user messaging.
+3. **Zod validation** - Run automated schema script against auth/onboarding/document forms; capture CLI output.
+4. **Workspace document preview** - Test PDF/Docx/Image/large file/mobile/offline scenarios, confirm loading + error boundary.
+5. **Document preview page** - Validate print/share/version controls and fallback download; capture audit log for downloads.
+6. **Download security** - Attempt expired/foreign signed URLs and batch progress/resume flows; confirm rejection logs.
+7. **Upload security** - Upload disallowed MIME + oversize files; verify rejection + telemetry.
+8. **Unit/integration tests** - `npm run build` + targeted Jest once tooling issues are cleared.
 
 ## Pre-Merge Checklist
-- Build Task Packets for each WBS item with acceptance/tests/rollback.
-- Implement features in guarded slices with feature flags for risky UI rewrites.
-- Update SSOT rows with live evidence (commits, builds, manual test logs).
-- Provide updated handoff package with risk register and rollback paths before requesting merge into integration.
+- [ ] Fix client ESLint errors and rerun `cmd /c npm run lint`.
+- [ ] Upgrade Node and rerun `cmd /c npm run build` plus targeted Vitest suites (use `npx vitest run src/hooks/__tests__/useAuthApi.test.js ...`).
+- [ ] Resolve server `npm install` failures, then rerun `cmd /c npm run lint`, `cmd /c npm run build`, and targeted Jest for document upload/download modules.
+- [ ] Execute the manual verification suites above; attach screenshots/logs to SSOT WBS rows.
+- [ ] Update SSOT with links to the logs and manual artifacts once all evidence is captured.
