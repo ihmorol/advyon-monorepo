@@ -1,38 +1,43 @@
 # advyon-client Merge Worklist
 
 ## Branch: `sro/feat/foundation-document-reliability`
-- [ ] Merge router updates with future AI/Admin routes while keeping `RouteErrorBoundary`.  
-  Files: `src/routes/index.jsx`, `src/components/RouteErrorBoundary.jsx`.
-- [ ] Land document viewer suite (`DocumentAdapter`, `PDFViewer`, `DocumentErrorBoundary`, `useDocumentDownload`) and verify against server download endpoints.  
-  Test: manual preview of PDF/image/docx + download gating.
-- [ ] Integrate `syncUserWithRetry` across `DashboardLayout` and ensure Clerk fallback flows.  
-  Test: simulate API failure to trigger retry UI.
-- [ ] Normalize `useDocumentsStore` duplicates + telemetry.  
-  Test: add temporary unit/smoke check.
-- [ ] Update onboarding/auth flows to Zod schemas; confirm parity with backend.
+
+| Task | Status | Notes / Owners |
+| --- | --- | --- |
+| Merge router updates with AI/Admin routes while keeping `RouteErrorBoundary`. | In Progress | Conflict map captured in `reports/advyon-client/strategy/branch-analysis.md`; awaiting paired server merge to avoid orphaned routes. |
+| Land document viewer suite (`DocumentAdapter`, `PDFViewer`, `DocumentErrorBoundary`, `useDocumentDownload`) and verify endpoints. | Ready | Blocked on server download contract; see cross-repo note “Document Download Contract”. |
+| Integrate `syncUserWithRetry` across `DashboardLayout` and ensure Clerk fallback flows. | Ready | Retry UX spec complete; will pair with auth API merge to avoid undefined hook usage. |
+| Normalize `useDocumentsStore` duplicates + telemetry. | Planned | Requires follow-up store test harness; add smoke test before marking done. |
+| Update onboarding/auth flows to Zod schemas; confirm parity with backend. | Planned | Coordination with server validation owners pending (SSOT WBS-1.4). |
 
 ## Branch: `ihm/feat/ai-community-intelligence`
-- [ ] Merge AI Tools page/tests and ensure route wrappers preserved.  
-  Files: `src/pages/dashboard/AIToolsPage.jsx/.test.jsx`, `src/routes/index.jsx`.
-- [ ] Reconcile community components + schemas with existing validation.  
-  Files: `src/features/community/*`, `src/store/useCommunityStore.js`.
-- [ ] Validate export/download flows for AI tool history (CSV/JSON).  
-  Manual test w/ mocked store data.
+
+| Task | Status | Notes / Owners |
+| --- | --- | --- |
+| Merge AI Tools page/tests and keep route wrappers intact. | In Progress | Waiting on router resolution from foundation branch; tracked under cross-repo risk “Router Alignment”. |
+| Reconcile community components + schemas with server validation. | Planned | Need schema freeze from backend before finalizing; document assumptions in SSOT risk column. |
+| Validate export/download flows for AI tool history (CSV/JSON). | Planned | Manual QA script drafted; execution blocked until `/ai/tools/history` endpoints land. |
 
 ## Branch: `sif/feat/core-practice-operations`
-- [ ] Resolve dependency additions (FullCalendar/Recharts) alongside other package updates.  
-  Files: `package.json`, `package-lock.json`.
-- [ ] After merge, run `npm install && npm run build` to ensure bundler aware of new deps.
+
+| Task | Status | Notes / Owners |
+| --- | --- | --- |
+| Resolve dependency additions (FullCalendar/Recharts) with other package updates. | Planned | Will run `npm install` after branch is locally available (fetch blocked). |
+| Run `npm install && npm run build` post-merge to confirm bundler support. | Planned | Depends on previous task. |
 
 ## Branch: `ab/feat/admin-commerce-governance`
-- [ ] Add Billing/Admin routes + nav while preserving guards and error boundaries.  
-  Files: `src/routes/index.jsx`, `src/components/Sidebar.jsx`.
-- [ ] Integrate Stripe client + billing/admin services; confirm env config handling.  
-  Files: `src/lib/stripe/stripeClient.js`, `src/services/{admin,billing}/*.js`, `.env` guidance.
-- [ ] Prepare manual QA script for AdminPanel + Billing flows (plan upgrade, cancel, portal, audit logs).
+
+| Task | Status | Notes / Owners |
+| --- | --- | --- |
+| Add Billing/Admin routes + nav while preserving guards/error boundaries. | Planned | Router merge sequencing documented; blocked behind foundation router work. |
+| Integrate Stripe client + billing/admin services; confirm env handling. | Planned | Waiting on server Stripe endpoints; see cross-repo risk “Admin & Billing”. |
+| Prepare manual QA script for AdminPanel + Billing flows. | In Progress | Test matrix drafted in reports/all/strategy/cross-repo-risks.md. |
 
 ## Verification Checklist
-- [ ] `npm run lint` (after combined merges).
-- [ ] `npm run build`.
-- [ ] Targeted Vitest suites: `src/hooks/__tests__/useAuthApi.test.js`, `src/store/useCommunityStore.test.js`, `src/pages/dashboard/AIToolsPage.test.jsx`.
-- [ ] Manual regression: document preview/download, AI tools, admin dashboard, billing.
+
+| Check | Status | Notes |
+| --- | --- | --- |
+| `npm run lint` (post-merge) | Planned | To run once all feature branches integrated. |
+| `npm run build` | Planned | Bundled with lint run. |
+| Targeted Vitest suites (`useAuthApi`, `useCommunityStore`, `AIToolsPage`) | Planned | Dependent on dependency install + environment fix for Vitest. |
+| Manual regression (document preview/download, AI tools, admin dashboard, billing) | Planned | Scripts reside in branch-status/manual-verification.md; execution scheduled post-merge. |

@@ -27,6 +27,14 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 | Team 4 Core Practice Operations | `sif/feat/core-practice-operations` |
 | Team 5 Admin Commerce Governance | `ab/feat/admin-commerce-governance` |
 
+## Merge Planning Update – 18 Feb 2026
+- **Team 1 (WBS-1.2, WBS-1.3, WBS-5.3/5.4/5.5):** Scope remains `NS`, but merge preparation and risk handling are documented in `reports/advyon-client/plan/merge-worklist.md`. Execution is blocked until the server download contract lands (see cross-repo risk #2).  
+- **Program Validation (WBS-1.4 / WBS-SM-MVP-02):** Team 3 slice is `DN`; other teams stay `IP`. Schema parity checkpoints are logged under cross-repo risk #6.  
+- **Team 2 (WBS-10.x)** continues `NS` with outstanding copy/contact/metadata work; refer to `reports/branch-status/team2-public.md` for readiness plan.  
+- **Team 4 (WBS-6.x/7.x/8.x/9.x)** remains `NS` pending schedule/notification design. Client dependency changes will be deferred until UI is ready per reports/advyon-client plan.  
+- **Team 5 (WBS-11.1, WBS-12.1)** stays `NS`, but governance/billing merge plan plus QA matrix is now captured in both client/server worklists and `reports/all/strategy/cross-repo-risks.md`.  
+- **Program OPS / TD tasks:** Testing gaps and governance prerequisites are linked to cross-repo risk item #7; follow-up tickets are needed before requesting integration merges.
+
 ## Team 3 Task Packet and Execution Log
 
 ### Active Task Packet: WBS-3.1 Content Moderation for Community Hub
