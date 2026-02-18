@@ -1,21 +1,34 @@
 # Merge Readiness Plan - advyon-client & advyon-server
 
+## Update - 2026-02-18 (Late State Refresh)
+- This document remains the historical merge log for early-day blockers.
+- The active final-day execution baseline is now `reports/all/plan/post-merge-risk-closure-plan.md`.
+- Re-validated state:
+  - `advyon-client`: `npm run build` passes; `npm run lint` still fails (41 errors, 7 warnings).
+  - `advyon-client`: targeted Vitest suites (`useAuthApi`, `useCommunityStore`, `AIToolsPage`, `communitySchemas`) now pass after test compatibility fixes.
+  - `advyon-server`: targeted Team 3 Jest suite passes (5/5).
+  - `advyon-server`: targeted Team 1 service suites (`case.test.ts`, `document.test.ts`) now pass.
+  - `advyon-server`: `npm run build` now passes after minimal typed integration fixes.
+  - `advyon-server`: `npm run lint` still fails with broad rule/config debt.
+  - `advyon-server`: full reset seeding utility refactored (`scripts/seed.database.ts`) to use Mongo-generated `_id` references with integrity checks and the three provided test accounts.
+  - `advyon-server`: authenticated API smoke matrix passes (`20/20`) via seeded-role principal test harness (`tests/smoke/api.smoke.test.ts`), with evidence in `reports/all/strategy/api-smoke-matrix-2026-02-18.md`.
+
 ## Phase 0 - Preflight (Status: Completed 2026-02-18)
 - Captured `git status -sb` for the root and both submodules while on `ihm/fix/merge-teamwork`; only the expected submodule pointers show as modified.
 - Archived the current `docs/task-orchestration/SSOT_WBS_TRACKER.md` snapshot for evidence and kept the reports directory structure (`reports/{advyon-client,advyon-server,all}`) intact.
 - Remote fetch remains blocked, so analysis relies on the local history from each branch plus the task packets already migrated into `/reports`.
 
 ## Phase 1 - advyon-client Merge Order (Status: Code merged, verification blocked)
-1. **sro/feat/foundation-document-reliability** – Router wrappers, document viewer stack, `syncUserWithRetry`, store normalization, and Zod schemas all landed in `advyon-client/src/**`. Outstanding item: automated lint/build/test runs (React 19 ESLint emits 118 errors; Vite build requires Node >=22.12).
-2. **ihm/feat/ai-community-intelligence** – `AIToolsPage`, community stores, schemas, and tests sit behind feature flags with `RouteErrorBoundary` applied. Awaiting Vitest execution and manual export QA.
-3. **sif/feat/core-practice-operations** – Dependency bumps (FullCalendar, Recharts, socket.io-client) exist in `package.json`, but bundler validation is blocked by the Node version mismatch.
-4. **ab/feat/admin-commerce-governance** – Admin/Billing routes, sidebar entries, services, and the Stripe client are merged. Manual QA is deferred until the server installs `stripe/node-cron/uuid` so end-to-end flows can run.
+1. **sro/feat/foundation-document-reliability** ï¿½ Router wrappers, document viewer stack, `syncUserWithRetry`, store normalization, and Zod schemas all landed in `advyon-client/src/**`. Outstanding item: automated lint/build/test runs (React 19 ESLint emits 118 errors; Vite build requires Node >=22.12).
+2. **ihm/feat/ai-community-intelligence** ï¿½ `AIToolsPage`, community stores, schemas, and tests sit behind feature flags with `RouteErrorBoundary` applied. Awaiting Vitest execution and manual export QA.
+3. **sif/feat/core-practice-operations** ï¿½ Dependency bumps (FullCalendar, Recharts, socket.io-client) exist in `package.json`, but bundler validation is blocked by the Node version mismatch.
+4. **ab/feat/admin-commerce-governance** ï¿½ Admin/Billing routes, sidebar entries, services, and the Stripe client are merged. Manual QA is deferred until the server installs `stripe/node-cron/uuid` so end-to-end flows can run.
 
 ## Phase 2 - advyon-server Merge Order (Status: Code merged, environment blockers)
-1. **sro/feat/foundation-document-reliability** – `fileUploadSecurity` middleware plus document download/batch routes are live in `src/app/modules/{case,document}`. Need targeted Jest once lint/build are green.
-2. **ihm/feat/ai-community-intelligence** – OpenRouter config, AI context manager, tool services, moderation queue, sanitizer, and KPI modules are present; Jest cannot start because `cmd /c npm run test` fails with `spawn EPERM`.
-3. **sif/feat/core-practice-operations** – Schedule, notification, messaging, personalization, analytics, socket, and archive scheduler modules are committed. Runtime verification depends on resolving the missing dependencies.
-4. **ab/feat/admin-commerce-governance** – `app.ts` now wires CORS, rate limiter, admin/payment/subscription routes plus Stripe config. TypeScript build fails until `stripe`, `uuid`, and `node-cron` install cleanly.
+1. **sro/feat/foundation-document-reliability** ï¿½ `fileUploadSecurity` middleware plus document download/batch routes are live in `src/app/modules/{case,document}`. Need targeted Jest once lint/build are green.
+2. **ihm/feat/ai-community-intelligence** ï¿½ OpenRouter config, AI context manager, tool services, moderation queue, sanitizer, and KPI modules are present; Jest cannot start because `cmd /c npm run test` fails with `spawn EPERM`.
+3. **sif/feat/core-practice-operations** ï¿½ Schedule, notification, messaging, personalization, analytics, socket, and archive scheduler modules are committed. Runtime verification depends on resolving the missing dependencies.
+4. **ab/feat/admin-commerce-governance** ï¿½ `app.ts` now wires CORS, rate limiter, admin/payment/subscription routes plus Stripe config. TypeScript build fails until `stripe`, `uuid`, and `node-cron` install cleanly.
 
 ## Phase 3 - Cross-Repo Alignment (Status: Partially satisfied)
 - Document download, AI tool history, admin/billing, and schedule/notification contracts now exist on both client and server, but compliance evidence is pending because `npm run build/test` do not complete.
