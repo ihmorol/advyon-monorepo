@@ -41,9 +41,11 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 - **Seed execution evidence:** `npm run seed:db` executed in `advyon-server` (dev DB) with provided 3 accounts; all seeded reference checks report `0` mismatches and major collections are populated (e.g., cases 12, documents 36, notifications 30, messages 30, subscriptions 20, payments 20).
 - **Model analysis evidence:** server-side ID/reference mapping and constraints documented in `reports/all/strategy/server-model-reference-analysis-2026-02-18.md`.
 - **API smoke evidence:** authenticated smoke matrix (mocked auth principal mapped to seeded accounts) passed `20/20` in `reports/all/strategy/api-smoke-matrix-2026-02-18.md`.
-- **Feature flow checklist evidence:** seeded-account workflow matrix passed `27/27` in `reports/all/strategy/feature-flow-checklist-2026-02-18.md` covering case/schedule/message/notification/admin/billing role-gates.
+- **Feature flow checklist evidence:** latest seeded-account matrix run reports `26/27` in `reports/all/strategy/feature-flow-checklist-2026-02-18.md` (single failure on billing checkout path with `500`); case/schedule/message/notification/admin/role-gate checks remain passing.
 - **Client parity refresh:** message and analytics client stores now align with live server routes (`/messages/pending/count`, `DELETE /messages/:id`, `/analytics/metrics/*`) and parse wrapped response payloads correctly.
 - **Navigation hardening:** dashboard message navigation now has non-breaking routes (`/dashboard/messages`, `/dashboard/messages/:messageId`) to avoid 404 dead-ends during operational flows.
+- **Client workflow activation:** `ClientsPage` now wires "Add Client" to a live invite-existing flow (`/case-access/share`) with case selection, and "Remove Access" to revoke API (`/case-access/:caseId/:userId`).
+- **Access-control hardening:** case search no longer bypasses ownership/shared scope (`case.service.ts`), and document direct endpoints now enforce case membership before read/content/status/summary/download operations.
 
 ## Team 3 Task Packet and Execution Log
 
@@ -119,7 +121,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 | WBS-5.4 | MVP | Team 1 | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | Multi-type preview flow merged; document service tests passing, print/share/version manual proof pending |
 | WBS-5.5 | MVP | Team 1 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | Secure download + batch endpoints merged; server document tests passing, security/manual evidence pending |
 | WBS-6.1 | Post-MVP | Team 4 | IP | In Progress | In Progress | Pending | Commit after >=3 files or logical unit | Schedule backend ID-reference bug fixed (`schedule.service.ts`), API smoke route passes; UI/manual runtime evidence pending |
-| WBS-7.1 | MVP | Team 4 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
+| WBS-7.1 | MVP | Team 4 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | Invite-existing client flow implemented in `ClientsPage.jsx` + `caseAccessService.js`; backend case-share/revoke normalization and authorization fixes in `caseAccess.service.ts`/`caseAccess.controller.ts` |
 | WBS-7.2 | MVP | Team 4 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | Messaging backend ID handling fixed (`message.service.ts`); client store contract parity fixed (`useMessageStore.js`), and send/read/star/archive flow passes in feature checklist |
 | WBS-8.1 | Post-MVP | Team 4 | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | Analytics backend merged; client now consumes `/analytics/metrics/*` via `useAnalyticsStore.js`; metrics smoke route passes, dashboard/export manual validation pending |
 | WBS-8.1-FUT | Future | Team 4 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
