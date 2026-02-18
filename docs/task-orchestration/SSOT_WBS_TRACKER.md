@@ -1,10 +1,12 @@
 # SSOT WBS Tracker (Canonical Source of Truth)
 
 ## Purpose
+
 This document is the only authoritative tracker for planning and execution status for all tasks from `TASK_PLAN.md`.
 Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCOL.md`.
 
 ## Status Legend
+
 - `NS`: Not started
 - `IP`: In progress
 - `RV`: In review
@@ -12,6 +14,7 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 - `BL`: Blocked
 
 ## Global Enforcement
+
 - Commit policy is mandatory for every task: commit immediately after touching 3 or more files or completing a logical unit.
 - Requirement match cannot be marked pass until checklist items are complete and verified.
 - Every row must include evidence link (PR, commit hash, test report, or demo note).
@@ -19,15 +22,17 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 - Every implementation task requires a Task Packet (scope, contracts, tests, rollback) before coding.
 
 ## Team and Branch Registry
-| Team | Branch |
-|---|---|
-| Team 1 Foundation Reliability | `sro/feat/foundation-document-reliability` |
-| Team 2 Public Experience | `msi/feat/public-content-metadata` |
-| Team 3 AI and Community Intelligence | `ihm/feat/ai-community-intelligence` |
-| Team 4 Core Practice Operations | `sif/feat/core-practice-operations` |
-| Team 5 Admin Commerce Governance | `ab/feat/admin-commerce-governance` |
+
+| Team                                 | Branch                                     |
+| ------------------------------------ | ------------------------------------------ |
+| Team 1 Foundation Reliability        | `sro/feat/foundation-document-reliability` |
+| Team 2 Public Experience             | `ihm/feat/public-content-metadata`         |
+| Team 3 AI and Community Intelligence | `ihm/feat/ai-community-intelligence`       |
+| Team 4 Core Practice Operations      | `sif/feat/core-practice-operations`        |
+| Team 5 Admin Commerce Governance     | `ab/feat/admin-commerce-governance`        |
 
 ## Merge Planning Update – 18 Feb 2026 (Post-Merge Refresh)
+
 - **Environment/tooling state:** Compile and targeted test blockers are reduced (`advyon-client`/`advyon-server` builds pass, targeted client Vitest and targeted Team 3 server Jest pass), but quality gates remain open because full lint debt is unresolved.
 - **Team 1 (WBS-1.2, WBS-1.3, WBS-5.3/5.4/5.5):** Code is merged and status is now tracked as `IP` pending full manual evidence and lint/test gate closure.
 - **Program Validation (WBS-1.4 / WBS-SM-MVP-02):** Team 3 slice remains `DN`; remaining team slices stay `IP` until form parity evidence is attached.
@@ -50,6 +55,7 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 ## Team 3 Task Packet and Execution Log
 
 ### Active Task Packet: WBS-3.1 Content Moderation for Community Hub
+
 - Objective: Deliver toxicity/spam/off-topic moderation with auto-flagging, review queue, configurable threshold, and appeals for thread/reply creation.
 - In-scope files: `advyon-server/src/app/modules/community/*`, `advyon-server/src/app/modules/ai/*`, Team 3 owned client community/AI files.
 - Out-of-scope files: payment/admin/operations modules, non-Team-3 domain features.
@@ -61,6 +67,7 @@ Execution mechanics are defined in `docs/task-orchestration/AI_EXECUTION_PROTOCO
 - Risk and blocker notes: pending package install/runtime constraints for moderation model.
 
 ### Team 3 Execution Cycle Log
+
 Note: this log is chronological. `IP` rows capture in-flight status at that timestamp; final status is recorded in later `DN` rows and in the Team 3 DoD Snapshot/Master WBS board.
 | Timestamp | WBS ID | Status | Owner/Role | Blockers | Next Action | Evidence |
 |---|---|---|---|---|---|---|
@@ -87,114 +94,119 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 | 2026-02-16T23:21:11+06:00 | WBS-3.1 / WBS-3.2 | DN | Team 3 stabilization pod (security-engineer + frontend-lead + backend-lead) | None | Keep stricter moderation and lower-friction assist thresholds for production readiness | Commits `a04e00c` (server obfuscation moderation hardening + assist validation coverage) and `eaeaf61` (client assist threshold alignment); server build + moderation/assist/validation jest pass; client build pass |
 
 ### Team 3 DoD Snapshot (Assigned Scope)
-| WBS ID | Team 3 Scope Status | Evidence |
-|---|---|---|
-| WBS-3.1 | DN | `feb5396`, `e365747`, `a04e00c`, moderation pipeline + stronger profanity defense + obfuscation-regex coverage |
-| WBS-3.3 | DN | `3116ae4`, `362672d`, `860c4b7`, tools backend/UI/history/export with dynamic filters/search |
-| WBS-3.4 | DN | `6246fc4`, `f3fa49e`, legal context manager with persistent memory + personalization profile |
-| WBS-3.2 | DN | `3116ae4`, `362672d`, `676d00d`, `a04e00c`, `eaeaf61`, community AI assist APIs + resilient UX error handling + lower-friction validation parity |
-| WBS-1.4 (Team 3 domain) | DN (team slice) | `feb5396`, `4febb0f`, `68c15a8`, `676d00d`, validation parity and category contract hardening |
-| WBS-DEP-SV-02 | DN | `feb5396`, moderation dependency and queue-safe runtime |
-| WBS-TD-SC-02 | DN | `feb5396`, centralized sanitizer integrated |
-| WBS-SM-MVP-02 (Team 3 domain) | DN (team slice) | Automated schema checks + build/test evidence in handoff docs |
-| WBS-SM-KPI-04 | DN | `4febb0f`, `/ai/tools/metrics` |
-| WBS-SM-KPI-05 | DN | `4febb0f`, `4aaf158`, `/community/metrics/engagement` |
+
+| WBS ID                        | Team 3 Scope Status | Evidence                                                                                                                                         |
+| ----------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| WBS-3.1                       | DN                  | `feb5396`, `e365747`, `a04e00c`, moderation pipeline + stronger profanity defense + obfuscation-regex coverage                                   |
+| WBS-3.3                       | DN                  | `3116ae4`, `362672d`, `860c4b7`, tools backend/UI/history/export with dynamic filters/search                                                     |
+| WBS-3.4                       | DN                  | `6246fc4`, `f3fa49e`, legal context manager with persistent memory + personalization profile                                                     |
+| WBS-3.2                       | DN                  | `3116ae4`, `362672d`, `676d00d`, `a04e00c`, `eaeaf61`, community AI assist APIs + resilient UX error handling + lower-friction validation parity |
+| WBS-1.4 (Team 3 domain)       | DN (team slice)     | `feb5396`, `4febb0f`, `68c15a8`, `676d00d`, validation parity and category contract hardening                                                    |
+| WBS-DEP-SV-02                 | DN                  | `feb5396`, moderation dependency and queue-safe runtime                                                                                          |
+| WBS-TD-SC-02                  | DN                  | `feb5396`, centralized sanitizer integrated                                                                                                      |
+| WBS-SM-MVP-02 (Team 3 domain) | DN (team slice)     | Automated schema checks + build/test evidence in handoff docs                                                                                    |
+| WBS-SM-KPI-04                 | DN                  | `4febb0f`, `/ai/tools/metrics`                                                                                                                   |
+| WBS-SM-KPI-05                 | DN                  | `4febb0f`, `4aaf158`, `/community/metrics/engagement`                                                                                            |
 
 ## Master WBS Status Board
-| WBS ID | Tier | Team | Status | Requirement Match | QA Gate | Security Gate | Commit Rule | Evidence |
-|---|---|---|---|---|---|---|---|---|
-| WBS-1.1 | MVP | Team 2 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-1.2 | MVP | Team 1 | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | Code merged; manual + lint evidence pending per `reports/advyon-client/plan/merge-worklist.md` |
-| WBS-1.3 | MVP | Team 1 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | `syncUserWithRetry` merged; targeted Vitest (`useAuthApi`) now passing, manual resilience evidence still pending |
-| WBS-1.4 | MVP | Teams 1-5 | IP | In Progress | Build Passed | Pending | Commit after >=3 files or logical unit | Team 3 scope DN: `feb5396`, `4febb0f`, `68c15a8`; other teams pending |
-| WBS-2.1 | MVP | Team 2 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-2.2 | MVP | Team 2 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-3.1 | Post-MVP | Team 3 | DN | Pass | Passed | Passed | Commit after >=3 files or logical unit | Commits `feb5396`, `e365747`, `ee6d9b6`, `a04e00c`; moderation pipeline + review/appeals + profanity hardening + obfuscation detection |
-| WBS-3.2 | Future | Team 3 | DN | Pass | Passed | Passed | Commit after >=3 files or logical unit | Commits `3116ae4`, `362672d`, `676d00d`, `a04e00c`, `eaeaf61`; optional/non-blocking community AI assistance with resilient error UX + relaxed assist validation |
-| WBS-3.3 | Post-MVP | Team 3 | DN | Pass | Passed | Passed | Commit after >=3 files or logical unit | Commits `3116ae4`, `362672d`, `860c4b7`; tools backend/UI/history/export/limits with dynamic history UX |
-| WBS-3.4 | Post-MVP | Team 3 | DN | Pass | Passed | Passed | Commit after >=3 files or logical unit | Commits `6246fc4`, `f3fa49e`; legal-only context manager with prompt-injection defense, persistent memory, and personalization |
-| WBS-4.1 | Post-MVP | Team 4 | IP | In Progress | Pending | Pending | Commit after >=3 files or logical unit | Backend personalization modules merged; contract/manual evidence pending |
-| WBS-4.2 | Post-MVP | Team 4 | IP | In Progress | In Progress | Pending | Commit after >=3 files or logical unit | Archive scheduler/lifecycle backend merged; smoke flow returns guarded `400` on archive/restore edge path, manual policy confirmation still pending |
-| WBS-5.1 | MVP | Team 4 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-5.2 | Post-MVP | Team 4 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-5.3 | MVP | Team 1 | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | Viewer/error-boundary stack merged; `document.test.ts` passing, manual reliability matrix pending |
-| WBS-5.4 | MVP | Team 1 | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | Multi-type preview flow merged; document service tests passing, print/share/version manual proof pending |
-| WBS-5.5 | MVP | Team 1 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | Secure download + batch endpoints merged; server document tests passing, security/manual evidence pending |
-| WBS-6.1 | Post-MVP | Team 4 | IP | In Progress | In Progress | Pending | Commit after >=3 files or logical unit | Schedule backend ID-reference bug fixed (`schedule.service.ts`), API smoke route passes; UI/manual runtime evidence pending |
-| WBS-7.1 | MVP | Team 4 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | Invite-existing client flow implemented in `ClientsPage.jsx` + `caseAccessService.js`; backend case-share/revoke normalization and authorization fixes in `caseAccess.service.ts`/`caseAccess.controller.ts` |
-| WBS-7.2 | MVP | Team 4 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | Messaging backend ID handling fixed (`message.service.ts`); client store contract parity fixed (`useMessageStore.js`), and send/read/star/archive flow passes in feature checklist |
-| WBS-8.1 | Post-MVP | Team 4 | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | Analytics backend merged; client now consumes `/analytics/metrics/*` via `useAnalyticsStore.js`; metrics smoke route passes, dashboard/export manual validation pending |
-| WBS-8.1-FUT | Future | Team 4 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-9.1 | MVP | Team 4 | IP | In Progress | In Progress | Pending | Commit after >=3 files or logical unit | Notification ID-reference bug fixed (`notification.service.ts`), API smoke route passes; real Clerk-token E2E channel evidence pending |
-| WBS-10.1 | MVP | Team 2 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-10.2 | MVP | Team 2 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-10.3 | Future | Team 2 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-10.4 | MVP | Team 2 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-10.5 | Future | Team 2 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-11.1 | MVP | Team 5 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | Admin users/settings/analytics/audit routes pass in feature checklist; superAdmin-only role mutation still pending manual coverage |
-| WBS-12.1 | MVP | Team 5 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | Billing history/subscription routes pass; checkout path returns controlled `503` while Stripe secret is unset (expected in current dev env) |
-| WBS-TD-CQ-01 | Ongoing | Team 1 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-CQ-02 | Ongoing | Team 1 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-CQ-03 | Ongoing | Team 1 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-CQ-04 | Ongoing | Team 5 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-CQ-05 | Ongoing | Team 5 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-PF-01 | Ongoing | Team 4 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-PF-02 | Ongoing | Team 2 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-PF-03 | Ongoing | Team 4 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-PF-04 | Ongoing | Team 4 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-PF-05 | Ongoing | Team 4 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-TS-01 | Ongoing | Team 1 owner | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | Targeted utility/form tests passing (`useAuthApi`, community schemas); broader coverage still pending |
-| WBS-TD-TS-02 | Ongoing | Team 4 owner | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | API integration suites passing for case/document/community; seed refactored to Mongo `_id` references with zero mismatch validation via `advyon-server/scripts/seed.database.ts` |
-| WBS-TD-TS-03 | Ongoing | Team 4 owner | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | End-to-end API workflow smoke checks added (`tests/smoke/feature-flow.smoke.test.ts`) with case/schedule/message/notification/admin/billing coverage |
-| WBS-TD-TS-04 | Ongoing | Team 2 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-TS-05 | Ongoing | Team 5 owner | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-SC-01 | Ongoing | Team 5 owner | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-SC-02 | Ongoing | Team 3 owner | DN | Pass | Passed | Passed | Commit after >=3 files or logical unit | Commits `feb5396`; centralized prompt/UGC sanitizer integrated |
-| WBS-TD-SC-03 | Ongoing | Team 1 owner | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-SC-04 | Ongoing | Team 5 owner | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-TD-SC-05 | Ongoing | Team 5 owner | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-DEP-CL-01 | Enabler | Team 5 | IP | In Progress | Pending | N/A | Commit after >=3 files or logical unit | Stripe client dependency integrated in billing scope; end-to-end proof pending |
-| WBS-DEP-CL-02 | Enabler | Team 5 | IP | In Progress | Pending | N/A | Commit after >=3 files or logical unit | React Stripe integration merged; billing test evidence pending |
-| WBS-DEP-CL-03 | Enabler | Team 4 | IP | In Progress | Pending | N/A | Commit after >=3 files or logical unit | Calendar dependency merged in client package; feature wiring pending |
-| WBS-DEP-CL-04 | Enabler | Team 4 | IP | In Progress | Pending | N/A | Commit after >=3 files or logical unit | Chart dependency merged in client package; analytics wiring pending |
-| WBS-DEP-SV-01 | Enabler | Team 5 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | Stripe SDK integrated; compile passes, checkout endpoint now verified to fail-safe with `503` when secret is absent |
-| WBS-DEP-SV-02 | Enabler | Team 3 | DN | Pass | Passed | Passed | Commit after >=3 files or logical unit | Commits `feb5396`; moderation dependency integrated with async queue-safe execution |
-| WBS-DEP-SV-03 | Enabler | Team 4 | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | `node-cron` integrated; schedule create/list/conflict/delete runtime flows pass in feature checklist |
-| WBS-OPS-01 | Program | Team 5 | NS | Pending | Pending | Pending | Commit after >=3 files or logical unit | TBD |
-| WBS-OPS-02 | Program | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-OPS-03 | Program | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-OPS-04 | Program | Team 4 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-OPS-05 | Program | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-OPS-06 | Program | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-SM-MVP-01 | Governance | Team 1 owner | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | Critical merged paths now compile and targeted case/document/auth tests pass; full manual closure pending |
-| WBS-SM-MVP-02 | Governance | Teams 1-5 | IP | In Progress | In Progress | Pending | Commit after >=3 files or logical unit | Team 3 scope DN with automated schema checks; other teams pending |
-| WBS-SM-MVP-03 | Governance | Team 5 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | Build + module wiring verified; checkout/webhook manual verification pending |
-| WBS-SM-MVP-04 | Governance | Team 5 | IP | In Progress | In Progress | In Progress | Commit after >=3 files or logical unit | Admin role-gate abuse paths validated in smoke checks (client blocked from admin endpoints); superAdmin-only mutation path still pending |
-| WBS-SM-MVP-05 | Governance | Team 4 | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | Analytics baseline validated via `/analytics/metrics/*` and `/admin/analytics` smoke checks; dashboard parity pending |
-| WBS-SM-MVP-06 | Governance | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-SM-MVP-07 | Governance | Team 2 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-SM-KPI-01 | Governance | Team 5 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
-| WBS-SM-KPI-02 | Governance | Team 4 | IP | In Progress | In Progress | N/A | Commit after >=3 files or logical unit | KPI-capable operations modules validated via metrics/overview smoke routes; visualization parity pending |
-| WBS-SM-KPI-03 | Governance | Team 1 | IP | In Progress | Pending | N/A | Commit after >=3 files or logical unit | Document upload telemetry merged; artifact verification pending |
-| WBS-SM-KPI-04 | Governance | Team 3 | DN | Pass | Passed | N/A | Commit after >=3 files or logical unit | Commit `4febb0f`; AI usage/success/fail/latency metrics endpoint `/ai/tools/metrics` |
-| WBS-SM-KPI-05 | Governance | Team 3 | DN | Pass | Passed | N/A | Commit after >=3 files or logical unit | Commits `4febb0f`, `4aaf158`; engagement metrics include thread/reply/vote/search/view/resolution |
-| WBS-SM-KPI-06 | Governance | Team 5 | IP | In Progress | Pending | N/A | Commit after >=3 files or logical unit | Billing/revenue modules merged; reconciliation evidence pending |
-| WBS-SM-KPI-07 | Governance | Team 2 | NS | Pending | Pending | N/A | Commit after >=3 files or logical unit | TBD |
+
+| WBS ID        | Tier       | Team         | Status | Requirement Match | QA Gate      | Security Gate | Commit Rule                            | Evidence                                                                                                                                                                                                     |
+| ------------- | ---------- | ------------ | ------ | ----------------- | ------------ | ------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| WBS-1.1       | MVP        | Team 2       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-1.2       | MVP        | Team 1       | IP     | In Progress       | In Progress  | N/A           | Commit after >=3 files or logical unit | Code merged; manual + lint evidence pending per `reports/advyon-client/plan/merge-worklist.md`                                                                                                               |
+| WBS-1.3       | MVP        | Team 1       | IP     | In Progress       | In Progress  | In Progress   | Commit after >=3 files or logical unit | `syncUserWithRetry` merged; targeted Vitest (`useAuthApi`) now passing, manual resilience evidence still pending                                                                                             |
+| WBS-1.4       | MVP        | Teams 1-5    | IP     | In Progress       | Build Passed | Pending       | Commit after >=3 files or logical unit | Team 3 scope DN: `feb5396`, `4febb0f`, `68c15a8`; other teams pending                                                                                                                                        |
+| WBS-2.1       | MVP        | Team 2       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-2.2       | MVP        | Team 2       | NS     | Pending           | Pending      | Pending       | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-3.1       | Post-MVP   | Team 3       | DN     | Pass              | Passed       | Passed        | Commit after >=3 files or logical unit | Commits `feb5396`, `e365747`, `ee6d9b6`, `a04e00c`; moderation pipeline + review/appeals + profanity hardening + obfuscation detection                                                                       |
+| WBS-3.2       | Future     | Team 3       | DN     | Pass              | Passed       | Passed        | Commit after >=3 files or logical unit | Commits `3116ae4`, `362672d`, `676d00d`, `a04e00c`, `eaeaf61`; optional/non-blocking community AI assistance with resilient error UX + relaxed assist validation                                             |
+| WBS-3.3       | Post-MVP   | Team 3       | DN     | Pass              | Passed       | Passed        | Commit after >=3 files or logical unit | Commits `3116ae4`, `362672d`, `860c4b7`; tools backend/UI/history/export/limits with dynamic history UX                                                                                                      |
+| WBS-3.4       | Post-MVP   | Team 3       | DN     | Pass              | Passed       | Passed        | Commit after >=3 files or logical unit | Commits `6246fc4`, `f3fa49e`; legal-only context manager with prompt-injection defense, persistent memory, and personalization                                                                               |
+| WBS-4.1       | Post-MVP   | Team 4       | IP     | In Progress       | Pending      | Pending       | Commit after >=3 files or logical unit | Backend personalization modules merged; contract/manual evidence pending                                                                                                                                     |
+| WBS-4.2       | Post-MVP   | Team 4       | IP     | In Progress       | In Progress  | Pending       | Commit after >=3 files or logical unit | Archive scheduler/lifecycle backend merged; smoke flow returns guarded `400` on archive/restore edge path, manual policy confirmation still pending                                                          |
+| WBS-5.1       | MVP        | Team 4       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-5.2       | Post-MVP   | Team 4       | NS     | Pending           | Pending      | Pending       | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-5.3       | MVP        | Team 1       | IP     | In Progress       | In Progress  | N/A           | Commit after >=3 files or logical unit | Viewer/error-boundary stack merged; `document.test.ts` passing, manual reliability matrix pending                                                                                                            |
+| WBS-5.4       | MVP        | Team 1       | IP     | In Progress       | In Progress  | N/A           | Commit after >=3 files or logical unit | Multi-type preview flow merged; document service tests passing, print/share/version manual proof pending                                                                                                     |
+| WBS-5.5       | MVP        | Team 1       | IP     | In Progress       | In Progress  | In Progress   | Commit after >=3 files or logical unit | Secure download + batch endpoints merged; server document tests passing, security/manual evidence pending                                                                                                    |
+| WBS-6.1       | Post-MVP   | Team 4       | IP     | In Progress       | In Progress  | Pending       | Commit after >=3 files or logical unit | Schedule backend ID-reference bug fixed (`schedule.service.ts`), API smoke route passes; UI/manual runtime evidence pending                                                                                  |
+| WBS-7.1       | MVP        | Team 4       | IP     | In Progress       | In Progress  | In Progress   | Commit after >=3 files or logical unit | Invite-existing client flow implemented in `ClientsPage.jsx` + `caseAccessService.js`; backend case-share/revoke normalization and authorization fixes in `caseAccess.service.ts`/`caseAccess.controller.ts` |
+| WBS-7.2       | MVP        | Team 4       | IP     | In Progress       | In Progress  | In Progress   | Commit after >=3 files or logical unit | Messaging backend ID handling fixed (`message.service.ts`); client store contract parity fixed (`useMessageStore.js`), and send/read/star/archive flow passes in feature checklist                           |
+| WBS-8.1       | Post-MVP   | Team 4       | IP     | In Progress       | In Progress  | N/A           | Commit after >=3 files or logical unit | Analytics backend merged; client now consumes `/analytics/metrics/*` via `useAnalyticsStore.js`; metrics smoke route passes, dashboard/export manual validation pending                                      |
+| WBS-8.1-FUT   | Future     | Team 4       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-9.1       | MVP        | Team 4       | IP     | In Progress       | In Progress  | Pending       | Commit after >=3 files or logical unit | Notification ID-reference bug fixed (`notification.service.ts`), API smoke route passes; real Clerk-token E2E channel evidence pending                                                                       |
+| WBS-10.1      | MVP        | Team 2       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-10.2      | MVP        | Team 2       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-10.3      | Future     | Team 2       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-10.4      | MVP        | Team 2       | NS     | Pending           | Pending      | Pending       | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-10.5      | Future     | Team 2       | NS     | Pending           | Pending      | Pending       | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-11.1      | MVP        | Team 5       | IP     | In Progress       | In Progress  | In Progress   | Commit after >=3 files or logical unit | Admin users/settings/analytics/audit routes pass in feature checklist; superAdmin-only role mutation still pending manual coverage                                                                           |
+| WBS-12.1      | MVP        | Team 5       | IP     | In Progress       | In Progress  | In Progress   | Commit after >=3 files or logical unit | Billing history/subscription routes pass; checkout path returns controlled `503` while Stripe secret is unset (expected in current dev env)                                                                  |
+| WBS-TD-CQ-01  | Ongoing    | Team 1 owner | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-CQ-02  | Ongoing    | Team 1 owner | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-CQ-03  | Ongoing    | Team 1 owner | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-CQ-04  | Ongoing    | Team 5 owner | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-CQ-05  | Ongoing    | Team 5 owner | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-PF-01  | Ongoing    | Team 4 owner | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-PF-02  | Ongoing    | Team 2 owner | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-PF-03  | Ongoing    | Team 4 owner | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-PF-04  | Ongoing    | Team 4 owner | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-PF-05  | Ongoing    | Team 4 owner | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-TS-01  | Ongoing    | Team 1 owner | IP     | In Progress       | In Progress  | N/A           | Commit after >=3 files or logical unit | Targeted utility/form tests passing (`useAuthApi`, community schemas); broader coverage still pending                                                                                                        |
+| WBS-TD-TS-02  | Ongoing    | Team 4 owner | IP     | In Progress       | In Progress  | N/A           | Commit after >=3 files or logical unit | API integration suites passing for case/document/community; seed refactored to Mongo `_id` references with zero mismatch validation via `advyon-server/scripts/seed.database.ts`                             |
+| WBS-TD-TS-03  | Ongoing    | Team 4 owner | IP     | In Progress       | In Progress  | N/A           | Commit after >=3 files or logical unit | End-to-end API workflow smoke checks added (`tests/smoke/feature-flow.smoke.test.ts`) with case/schedule/message/notification/admin/billing coverage                                                         |
+| WBS-TD-TS-04  | Ongoing    | Team 2 owner | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-TS-05  | Ongoing    | Team 5 owner | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-SC-01  | Ongoing    | Team 5 owner | NS     | Pending           | Pending      | Pending       | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-SC-02  | Ongoing    | Team 3 owner | DN     | Pass              | Passed       | Passed        | Commit after >=3 files or logical unit | Commits `feb5396`; centralized prompt/UGC sanitizer integrated                                                                                                                                               |
+| WBS-TD-SC-03  | Ongoing    | Team 1 owner | NS     | Pending           | Pending      | Pending       | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-SC-04  | Ongoing    | Team 5 owner | NS     | Pending           | Pending      | Pending       | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-TD-SC-05  | Ongoing    | Team 5 owner | NS     | Pending           | Pending      | Pending       | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-DEP-CL-01 | Enabler    | Team 5       | IP     | In Progress       | Pending      | N/A           | Commit after >=3 files or logical unit | Stripe client dependency integrated in billing scope; end-to-end proof pending                                                                                                                               |
+| WBS-DEP-CL-02 | Enabler    | Team 5       | IP     | In Progress       | Pending      | N/A           | Commit after >=3 files or logical unit | React Stripe integration merged; billing test evidence pending                                                                                                                                               |
+| WBS-DEP-CL-03 | Enabler    | Team 4       | IP     | In Progress       | Pending      | N/A           | Commit after >=3 files or logical unit | Calendar dependency merged in client package; feature wiring pending                                                                                                                                         |
+| WBS-DEP-CL-04 | Enabler    | Team 4       | IP     | In Progress       | Pending      | N/A           | Commit after >=3 files or logical unit | Chart dependency merged in client package; analytics wiring pending                                                                                                                                          |
+| WBS-DEP-SV-01 | Enabler    | Team 5       | IP     | In Progress       | In Progress  | In Progress   | Commit after >=3 files or logical unit | Stripe SDK integrated; compile passes, checkout endpoint now verified to fail-safe with `503` when secret is absent                                                                                          |
+| WBS-DEP-SV-02 | Enabler    | Team 3       | DN     | Pass              | Passed       | Passed        | Commit after >=3 files or logical unit | Commits `feb5396`; moderation dependency integrated with async queue-safe execution                                                                                                                          |
+| WBS-DEP-SV-03 | Enabler    | Team 4       | IP     | In Progress       | In Progress  | N/A           | Commit after >=3 files or logical unit | `node-cron` integrated; schedule create/list/conflict/delete runtime flows pass in feature checklist                                                                                                         |
+| WBS-OPS-01    | Program    | Team 5       | NS     | Pending           | Pending      | Pending       | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-OPS-02    | Program    | Team 5       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-OPS-03    | Program    | Team 5       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-OPS-04    | Program    | Team 4       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-OPS-05    | Program    | Team 5       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-OPS-06    | Program    | Team 5       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-SM-MVP-01 | Governance | Team 1 owner | IP     | In Progress       | In Progress  | N/A           | Commit after >=3 files or logical unit | Critical merged paths now compile and targeted case/document/auth tests pass; full manual closure pending                                                                                                    |
+| WBS-SM-MVP-02 | Governance | Teams 1-5    | IP     | In Progress       | In Progress  | Pending       | Commit after >=3 files or logical unit | Team 3 scope DN with automated schema checks; other teams pending                                                                                                                                            |
+| WBS-SM-MVP-03 | Governance | Team 5       | IP     | In Progress       | In Progress  | In Progress   | Commit after >=3 files or logical unit | Build + module wiring verified; checkout/webhook manual verification pending                                                                                                                                 |
+| WBS-SM-MVP-04 | Governance | Team 5       | IP     | In Progress       | In Progress  | In Progress   | Commit after >=3 files or logical unit | Admin role-gate abuse paths validated in smoke checks (client blocked from admin endpoints); superAdmin-only mutation path still pending                                                                     |
+| WBS-SM-MVP-05 | Governance | Team 4       | IP     | In Progress       | In Progress  | N/A           | Commit after >=3 files or logical unit | Analytics baseline validated via `/analytics/metrics/*` and `/admin/analytics` smoke checks; dashboard parity pending                                                                                        |
+| WBS-SM-MVP-06 | Governance | Team 5       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-SM-MVP-07 | Governance | Team 2       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-SM-KPI-01 | Governance | Team 5       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
+| WBS-SM-KPI-02 | Governance | Team 4       | IP     | In Progress       | In Progress  | N/A           | Commit after >=3 files or logical unit | KPI-capable operations modules validated via metrics/overview smoke routes; visualization parity pending                                                                                                     |
+| WBS-SM-KPI-03 | Governance | Team 1       | IP     | In Progress       | Pending      | N/A           | Commit after >=3 files or logical unit | Document upload telemetry merged; artifact verification pending                                                                                                                                              |
+| WBS-SM-KPI-04 | Governance | Team 3       | DN     | Pass              | Passed       | N/A           | Commit after >=3 files or logical unit | Commit `4febb0f`; AI usage/success/fail/latency metrics endpoint `/ai/tools/metrics`                                                                                                                         |
+| WBS-SM-KPI-05 | Governance | Team 3       | DN     | Pass              | Passed       | N/A           | Commit after >=3 files or logical unit | Commits `4febb0f`, `4aaf158`; engagement metrics include thread/reply/vote/search/view/resolution                                                                                                            |
+| WBS-SM-KPI-06 | Governance | Team 5       | IP     | In Progress       | Pending      | N/A           | Commit after >=3 files or logical unit | Billing/revenue modules merged; reconciliation evidence pending                                                                                                                                              |
+| WBS-SM-KPI-07 | Governance | Team 2       | NS     | Pending           | Pending      | N/A           | Commit after >=3 files or logical unit | TBD                                                                                                                                                                                                          |
 
 ## Requirement Checklists (Canonical)
 
 ### WBS-1.1 Landing Page Loading State
+
 - [ ] Loading state shown before content
 - [ ] Smooth transition to landing content
 - [ ] Handles auth state checking
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-1.2 Remove GitHub Login from Clerk
+
 - [ ] GitHub login button removed
 - [ ] Only email/password and Google remain (if desired)
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-1.3 Fix Sync Error After Login
+
 - [ ] Graceful error handling
 - [ ] Retry mechanism
 - [ ] Clear error messages
@@ -202,6 +214,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-1.4 All Form Validation with Zod
+
 - [ ] Every form has Zod schema
 - [ ] Client-side validation before submission
 - [ ] Server-side validation on all endpoints
@@ -211,6 +224,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-2.1 Update Content with Meaningful Data
+
 - [ ] All placeholder text replaced
 - [ ] Content reflects legal industry
 - [ ] Professional tone throughout
@@ -218,6 +232,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-2.2 Metadata API Updates
+
 - [ ] Court locations endpoint/value set
 - [ ] Case types/categories endpoint/value set
 - [ ] Document templates endpoint/value set
@@ -230,6 +245,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-3.1 Content Moderation for Community Hub
+
 - [x] Toxicity detection
 - [x] Spam detection
 - [x] Off-topic detection
@@ -242,6 +258,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-3.2 AI Features in Community Posts
+
 - [x] Auto-suggest similar threads
 - [x] AI-generated answer suggestions
 - [x] Legal reference recommendations
@@ -250,6 +267,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-3.3 AI Tools Page
+
 - [x] Contract analyzer
 - [x] Legal document generator
 - [x] Case law researcher
@@ -263,6 +281,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-3.4 Centralized AI Context
+
 - [x] Context boundary enforcement
 - [x] Off-topic question rejection
 - [x] Scope limitation (legal-only)
@@ -271,6 +290,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-4.1 Robust Personalization Database
+
 - [ ] User behavior tracking
 - [ ] Case preference learning
 - [ ] Dashboard widget personalization
@@ -281,6 +301,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-4.2 Case Archive Implementation
+
 - [ ] Archive case endpoint
 - [ ] Restore case endpoint
 - [ ] Archived cases list view
@@ -294,6 +315,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-5.1 New Case Creation UI Update
+
 - [ ] Multi-step wizard
 - [ ] Template selection
 - [ ] Client assignment
@@ -304,6 +326,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-5.2 Workspace Sidebar Real-time Updates
+
 - [ ] Real-time notification counts
 - [ ] New case alerts
 - [ ] Message notifications
@@ -312,6 +335,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-5.3 Fix Document Preview in Workspace
+
 - [ ] PDF rendering errors fixed
 - [ ] Large file handling fixed
 - [ ] Mobile responsiveness fixed
@@ -320,6 +344,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-5.4 Fix Document Preview Page
+
 - [ ] All document types supported
 - [ ] Smooth navigation
 - [ ] Print functionality
@@ -328,6 +353,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-5.5 Documents Page Download Button
+
 - [ ] Download original file
 - [ ] Download analyzed version
 - [ ] Batch download
@@ -336,6 +362,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-6.1 Complete Schedule Features
+
 - [ ] Calendar view (month/week/day)
 - [ ] Drag-and-drop rescheduling
 - [ ] Recurring events
@@ -346,6 +373,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-7.1 Complete Client Management Workflow
+
 - [ ] Add new client
 - [ ] Edit client details
 - [ ] Delete/archive client
@@ -356,6 +384,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-7.2 Client-Lawyer Interconnection Message
+
 - [ ] Case-specific messaging
 - [ ] File attachments
 - [ ] Read receipts
@@ -365,6 +394,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-8.1 Update Analytics Page
+
 - [ ] Case resolution time
 - [ ] Win/loss ratio
 - [ ] Revenue tracking
@@ -376,6 +406,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-9.1 Notification System Using Socket
+
 - [ ] Real-time notifications
 - [ ] Case updates notification type
 - [ ] New messages notification type
@@ -390,6 +421,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-10.1 Landing Page
+
 - [ ] Hero with CTA
 - [ ] Features showcase
 - [ ] How it works
@@ -401,6 +433,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-10.2 About Page
+
 - [ ] Company mission
 - [ ] Team members
 - [ ] Vision and values
@@ -409,6 +442,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-10.3 How to Use Page
+
 - [ ] Getting started guide
 - [ ] Feature tutorials
 - [ ] Video demonstrations
@@ -417,6 +451,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-10.4 Contact Page
+
 - [ ] Contact form
 - [ ] Email integration
 - [ ] Support ticket creation
@@ -425,6 +460,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-10.5 Other Public Pages
+
 - [ ] Terms of Service
 - [ ] Privacy Policy
 - [ ] Cookie Policy
@@ -435,6 +471,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-11.1 MVP Admin Controls
+
 - [ ] User management
 - [ ] Case oversight
 - [ ] Content moderation controls
@@ -445,6 +482,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-12.1 Payment Integration
+
 - [ ] Subscription plans
 - [ ] Stripe integration
 - [ ] Payment history
@@ -457,36 +495,42 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 ## Program Operations Checklists
 
 ### WBS-OPS-01 Multi-device Git safety
+
 - [ ] Team branches protected in GitHub
 - [ ] Required status checks configured
 - [ ] CODEOWNERS guards cross-team ownership boundaries
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-OPS-02 PR quality consistency
+
 - [ ] PR template enforces WBS mapping
 - [ ] PR template requires acceptance evidence
 - [ ] PR template requires rollback section
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-OPS-03 Cross-device sync discipline
+
 - [ ] Mandatory fetch/rebase cadence documented and adopted
 - [ ] Draft PR updates required every 4 hours
 - [ ] Stale branch detection enabled
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-OPS-04 Contract-first development
+
 - [ ] API contracts frozen before implementation windows
 - [ ] Contract changes versioned and approved
 - [ ] Consumer compatibility tests added for changed contracts
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-OPS-05 Merge train and conflict playbook
+
 - [ ] Two daily merge windows scheduled
 - [ ] Conflict ownership and resolution SLA defined
 - [ ] Integration branch health checks required before merge
 - Commit rule: commit after >=3 files or logical unit.
 
 ### WBS-OPS-06 Handoff SLA governance
+
 - [ ] Handoff template usage is mandatory
 - [ ] Handoff acceptance SLA is below 4 hours
 - [ ] Escalation path is documented and exercised
@@ -495,6 +539,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 ## Technical Debt Checklists
 
 ### Code Quality
+
 - [ ] WBS-TD-CQ-01 Consistent error handling across all API calls
 - [ ] WBS-TD-CQ-02 Proper loading states everywhere
 - [ ] WBS-TD-CQ-03 Error boundaries for all routes
@@ -502,6 +547,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - [ ] WBS-TD-CQ-05 Comprehensive JSDoc comments
 
 ### Performance
+
 - [ ] WBS-TD-PF-01 Proper caching strategies
 - [ ] WBS-TD-PF-02 Optimize images and assets
 - [ ] WBS-TD-PF-03 Pagination to all list endpoints
@@ -509,6 +555,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - [ ] WBS-TD-PF-05 Request deduplication
 
 ### Testing
+
 - [ ] WBS-TD-TS-01 Unit tests for critical utilities
 - [ ] WBS-TD-TS-02 Integration tests for API endpoints
 - [ ] WBS-TD-TS-03 E2E tests for critical user flows
@@ -516,6 +563,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - [ ] WBS-TD-TS-05 Performance benchmarks
 
 ### Security
+
 - [ ] WBS-TD-SC-01 Rate limiting on all endpoints
 - [x] WBS-TD-SC-02 Input sanitization
 - [ ] WBS-TD-SC-03 File upload security
@@ -523,6 +571,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - [ ] WBS-TD-SC-05 Secrets management audit
 
 ## Dependency Checklists
+
 - [ ] WBS-DEP-CL-01 `@stripe/stripe-js`
 - [ ] WBS-DEP-CL-02 `@stripe/react-stripe-js`
 - [ ] WBS-DEP-CL-03 `@fullcalendar/react` (or equivalent)
@@ -532,6 +581,7 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - [ ] WBS-DEP-SV-03 `node-cron`
 
 ## Release and KPI Verification
+
 - [ ] WBS-SM-MVP-01 All critical bugs fixed
 - [ ] WBS-SM-MVP-02 All forms validated
 - Program note: Team 3 slice is complete; global WBS-SM-MVP-02 remains open pending other teams.
@@ -549,4 +599,5 @@ Note: this log is chronological. `IP` rows capture in-flight status at that time
 - [ ] WBS-SM-KPI-07 Support ticket volume
 
 ## Handoff Rule
+
 For every WBS item, handoff must include context, acceptance checklist, risks, open questions, and receiver sign-off.
