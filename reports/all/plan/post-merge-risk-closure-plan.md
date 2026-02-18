@@ -53,7 +53,10 @@ Interpretation: environment-level blockers are reduced, but quality/build-readin
   - During smoke checks, two ID-reference defects were remediated:
     - `notification.service.ts` recipient/sender filtering now resolves `User.id` to ObjectId before querying.
     - `schedule.service.ts` now resolves `createdBy`/`participants`/`caseId` identifiers to ObjectId references.
-  - Evidence: `reports/all/strategy/api-smoke-matrix-2026-02-18.md` (`20/20` checks passed).
+    - `message.service.ts` now resolves business `caseId` values before ObjectId usage in create-thread flows.
+  - Evidence:
+    - `reports/all/strategy/api-smoke-matrix-2026-02-18.md` (`20/20` checks passed).
+    - `reports/all/strategy/feature-flow-checklist-2026-02-18.md` (`27/27` checks passed).
 
 - Phase 4 Support (Data Readiness) - Completed
   - Added full reset development seeding utility: `advyon-server/scripts/seed.database.ts`.

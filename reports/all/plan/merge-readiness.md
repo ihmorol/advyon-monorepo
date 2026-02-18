@@ -12,6 +12,7 @@
   - `advyon-server`: `npm run lint` still fails with broad rule/config debt.
   - `advyon-server`: full reset seeding utility refactored (`scripts/seed.database.ts`) to use Mongo-generated `_id` references with integrity checks and the three provided test accounts.
   - `advyon-server`: authenticated API smoke matrix passes (`20/20`) via seeded-role principal test harness (`tests/smoke/api.smoke.test.ts`), with evidence in `reports/all/strategy/api-smoke-matrix-2026-02-18.md`.
+  - `advyon-server`: workflow feature checklist passes (`27/27`) via `tests/smoke/feature-flow.smoke.test.ts`, including case/schedule/message/notification/admin/billing role-gate flows.
 
 ## Phase 0 - Preflight (Status: Completed 2026-02-18)
 - Captured `git status -sb` for the root and both submodules while on `ihm/fix/merge-teamwork`; only the expected submodule pointers show as modified.
