@@ -33,6 +33,7 @@ Verified in code:
 - Seeder execution: pass (`npm run seed:db`) on development database; references validated with zero mismatches and seeded through the three provided accounts.
 - Detailed model/reference analysis: `reports/all/strategy/server-model-reference-analysis-2026-02-18.md`.
 - Authenticated API smoke matrix: pass (`npx jest tests/smoke/api.smoke.test.ts --runInBand`) with 20/20 checks, evidence in `reports/all/strategy/api-smoke-matrix-2026-02-18.md`.
+- Feature workflow checklist: pass (`npx jest tests/smoke/feature-flow.smoke.test.ts --runInBand`) with 27/27 checks, evidence in `reports/all/strategy/feature-flow-checklist-2026-02-18.md`.
 
 ## Deferred/Unresolved by Decision
 

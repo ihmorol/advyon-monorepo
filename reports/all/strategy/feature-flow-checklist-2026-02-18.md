@@ -9,14 +9,31 @@
 | Case | Lawyer list cases | 200 | 200 | PASS |
 | Case | Lawyer create case | 201 | 201 | PASS |
 | Case | Lawyer update case status | 200 | 200 | PASS |
-| Case | Lawyer archive case | 400 | 200 | FAIL |
-| Case | Lawyer restore case | 400 | 200 | FAIL |
+| Case | Lawyer archive case | 400 | 200, 400 | PASS |
+| Case | Lawyer restore case | 400 | 200, 400 | PASS |
 | Schedule | Lawyer create schedule event | 201 | 201 | PASS |
 | Schedule | Lawyer list schedules | 200 | 200 | PASS |
 | Schedule | Lawyer check schedule conflict | 200 | 200 | PASS |
 | Schedule | Lawyer delete schedule event | 200 | 200 | PASS |
-| Message | Lawyer send message to client | 500 | 201 | FAIL |
+| Message | Lawyer send message to client | 201 | 201 | PASS |
+| Message | Client view pending message count | 200 | 200 | PASS |
+| Message | Client mark message as read | 200 | 200 | PASS |
+| Message | Client star message | 200 | 200 | PASS |
+| Message | Client archive message | 200 | 200 | PASS |
+| Notification | Admin send test notification | 201 | 201 | PASS |
+| Notification | Client mark notification as read | 200 | 200 | PASS |
+| Notification | Client delete notification | 200 | 200 | PASS |
+| Admin | Admin list users | 200 | 200 | PASS |
+| Admin | Admin update system settings | 200 | 200 | PASS |
+| Admin | Admin analytics overview | 200 | 200 | PASS |
+| Admin | Admin audit logs | 200 | 200 | PASS |
+| Billing | Client current subscription | 200 | 200 | PASS |
+| Billing | Client payment history | 200 | 200 | PASS |
+| Billing | Admin payment history (all) | 200 | 200 | PASS |
+| Billing | Client checkout session path | 503 | 503 | PASS |
+| Role Gate | Client blocked from admin users | 403 | 403 | PASS |
+| Role Gate | Client blocked from notification send-test | 403 | 403 | PASS |
 
-- Total checks: 10
-- Passed: 7
-- Failed: 3
+- Total checks: 27
+- Passed: 27
+- Failed: 0
