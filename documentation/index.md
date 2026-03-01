@@ -1,10 +1,10 @@
-# Advyon Legal Platform - Comprehensive Technical Documentation
+﻿# Advyon Legal Platform - Comprehensive Technical Documentation
 
 ## Table of Contents
 
 1. [Project Overview](#project-overview)
 2. [System Architecture](#system-architecture)
-3. [Database Schema & Models](#database-schema--models)
+3. [Database Schema & Models](#database-schema-models)
 4. [API Reference](#api-reference)
 5. [Frontend Architecture](#frontend-architecture)
 6. [AI Integrations](#ai-integrations)
@@ -12,6 +12,22 @@
 8. [Feature Documentation](#feature-documentation)
 9. [Testing Strategy](#testing-strategy)
 10. [Development Setup](#development-setup)
+
+---
+
+## Documentation Map
+| Section | Purpose |
+|---------|---------|
+| [Architecture Deep Dive](architecture/index.md) | High-level diagrams, technology stack, and directory conventions |
+| [Database Schema](architecture/database.md) | Mongo collections, ER diagrams, and index notes |
+| [Authentication Flow](architecture/auth-flow.md) | Clerk + Advyon auth pipeline, RBAC layering, Socket.io handshake |
+| [Data Flow & Integrations](architecture/data-flow.md) | L0/L1 diagrams for case intake, document AI, community analytics |
+| [User Control & RBAC](architecture/user-control.md) | Role matrix, CaseAccess sharing model, governance workflows |
+| [API Reference](api/index.md) | REST contracts per module (auth, cases, documents, analytics, etc.) |
+| [Client Guides](client/index.md) | Component hierarchy, routing, state management, and feature UX notes |
+| [Features Overview](features/overview.md) | Capability matrix, mind map, release timelines |
+| [Case Studies](features/case-studies.md) | End-to-end stories mapping UI actions to backend services |
+| [Guides](guides/operations.md) | Operations, testing, security, roadmap, contributing, glossary |
 
 ---
 
@@ -135,146 +151,146 @@ sequenceDiagram
 
 ```
 advyon-server/
-├── src/
-│   ├── app.ts                    # Express application entry
-│   ├── server.ts                  # Server startup
-│   ├── scripts/                   # Utility scripts
-│   │   └── seedLegalData.ts      # Database seeding
-│   └── app/
-│       ├── config/               # Configuration files
-│       │   ├── index.ts          # Main config
-│       │   ├── clerk.config.ts   # Clerk auth config
-│       │   ├── stripe.config.ts  # Stripe config
-│       │   ├── cloudinary.config.ts
-│       │   ├── gemini.config.ts  # Google Gemini
-│       │   ├── groq.config.ts    # Groq AI
-│       │   ├── openrouter.config.ts
-│       │   └── swagger.config.ts
-│       ├── modules/              # Feature modules
-│       │   ├── auth/             # Authentication
-│       │   ├── user/             # User management (includes Lawyer Profiles)
-│       │   ├── chat/             # NEW: Real-time chat (WebSocket)
-│       │   ├── case/             # Case management
-│       │   ├── document/        # Document management
-│       │   ├── community/       # Community forum
-│       │   ├── message/          # Messaging
-│       │   ├── notification/    # Notifications
-│       │   ├── schedule/        # Calendar/Scheduling
-│       │   ├── ai/              # AI services
-│       │   ├── legal/           # Legal database
-│       │   ├── payment/         # Payments
-│       │   ├── subscription/   # Subscriptions
-│       │   ├── activity/       # Activity tracking
-│       │   ├── caseAccess/      # Access control
-│       │   ├── admin/           # Admin functions
-│       │   ├── analytics/      # Analytics
-│       │   ├── insight/        # AI insights
-│       │   ├── metadata/       # Metadata
-│       │   ├── contact/         # Contact forms
-│       │   ├── health/          # Health checks
-│       │   └── dashboard/       # Dashboard data
-│       ├── middlewares/         # Express middlewares
-│       │   ├── auth.ts          # JWT verification
-│       │   ├── validateRequest.ts
-│       │   ├── rateLimiter.ts
-│       │   ├── fileUploadSecurity.ts
-│       │   ├── globalErrorhandler.ts
-│       │   └── notFound.ts
-│       ├── errors/               # Error handling
-│       │   ├── appError.ts
-│       │   ├── handleCastError.ts
-│       │   ├── handleDuplicateError.ts
-│       │   ├── handleValidationError.ts
-│       │   └── handleZodError.ts
-│       ├── utils/               # Utility functions
-│       │   ├── catchAsync.ts
-│       │   ├── sendResponse.ts
-│       │   ├── sendEmail.ts
-│       │   ├── document.utils.ts
-│       │   └── file.upload.utils.ts
-│       ├── contracts/           # API contracts
-│       └── DB/                  # Database connection
-│           └── index.ts
-├── tests/                        # Test files
-│   ├── smoke/                   # Smoke tests
-│   └── contracts/               # Contract tests
-├── dist/                        # Compiled output
-└── package.json
+â”œâ”€â”€ src/
+â”‚   â”œâ”€â”€ app.ts                    # Express application entry
+â”‚   â”œâ”€â”€ server.ts                  # Server startup
+â”‚   â”œâ”€â”€ scripts/                   # Utility scripts
+â”‚   â”‚   â””â”€â”€ seedLegalData.ts      # Database seeding
+â”‚   â””â”€â”€ app/
+â”‚       â”œâ”€â”€ config/               # Configuration files
+â”‚       â”‚   â”œâ”€â”€ index.ts          # Main config
+â”‚       â”‚   â”œâ”€â”€ clerk.config.ts   # Clerk auth config
+â”‚       â”‚   â”œâ”€â”€ stripe.config.ts  # Stripe config
+â”‚       â”‚   â”œâ”€â”€ cloudinary.config.ts
+â”‚       â”‚   â”œâ”€â”€ gemini.config.ts  # Google Gemini
+â”‚       â”‚   â”œâ”€â”€ groq.config.ts    # Groq AI
+â”‚       â”‚   â”œâ”€â”€ openrouter.config.ts
+â”‚       â”‚   â””â”€â”€ swagger.config.ts
+â”‚       â”œâ”€â”€ modules/              # Feature modules
+â”‚       â”‚   â”œâ”€â”€ auth/             # Authentication
+â”‚       â”‚   â”œâ”€â”€ user/             # User management (includes Lawyer Profiles)
+â”‚       â”‚   â”œâ”€â”€ chat/             # NEW: Real-time chat (WebSocket)
+â”‚       â”‚   â”œâ”€â”€ case/             # Case management
+â”‚       â”‚   â”œâ”€â”€ document/        # Document management
+â”‚       â”‚   â”œâ”€â”€ community/       # Community forum
+â”‚       â”‚   â”œâ”€â”€ message/          # Messaging
+â”‚       â”‚   â”œâ”€â”€ notification/    # Notifications
+â”‚       â”‚   â”œâ”€â”€ schedule/        # Calendar/Scheduling
+â”‚       â”‚   â”œâ”€â”€ ai/              # AI services
+â”‚       â”‚   â”œâ”€â”€ legal/           # Legal database
+â”‚       â”‚   â”œâ”€â”€ payment/         # Payments
+â”‚       â”‚   â”œâ”€â”€ subscription/   # Subscriptions
+â”‚       â”‚   â”œâ”€â”€ activity/       # Activity tracking
+â”‚       â”‚   â”œâ”€â”€ caseAccess/      # Access control
+â”‚       â”‚   â”œâ”€â”€ admin/           # Admin functions
+â”‚       â”‚   â”œâ”€â”€ analytics/      # Analytics
+â”‚       â”‚   â”œâ”€â”€ insight/        # AI insights
+â”‚       â”‚   â”œâ”€â”€ metadata/       # Metadata
+â”‚       â”‚   â”œâ”€â”€ contact/         # Contact forms
+â”‚       â”‚   â”œâ”€â”€ health/          # Health checks
+â”‚       â”‚   â””â”€â”€ dashboard/       # Dashboard data
+â”‚       â”œâ”€â”€ middlewares/         # Express middlewares
+â”‚       â”‚   â”œâ”€â”€ auth.ts          # JWT verification
+â”‚       â”‚   â”œâ”€â”€ validateRequest.ts
+â”‚       â”‚   â”œâ”€â”€ rateLimiter.ts
+â”‚       â”‚   â”œâ”€â”€ fileUploadSecurity.ts
+â”‚       â”‚   â”œâ”€â”€ globalErrorhandler.ts
+â”‚       â”‚   â””â”€â”€ notFound.ts
+â”‚       â”œâ”€â”€ errors/               # Error handling
+â”‚       â”‚   â”œâ”€â”€ appError.ts
+â”‚       â”‚   â”œâ”€â”€ handleCastError.ts
+â”‚       â”‚   â”œâ”€â”€ handleDuplicateError.ts
+â”‚       â”‚   â”œâ”€â”€ handleValidationError.ts
+â”‚       â”‚   â””â”€â”€ handleZodError.ts
+â”‚       â”œâ”€â”€ utils/               # Utility functions
+â”‚       â”‚   â”œâ”€â”€ catchAsync.ts
+â”‚       â”‚   â”œâ”€â”€ sendResponse.ts
+â”‚       â”‚   â”œâ”€â”€ sendEmail.ts
+â”‚       â”‚   â”œâ”€â”€ document.utils.ts
+â”‚       â”‚   â””â”€â”€ file.upload.utils.ts
+â”‚       â”œâ”€â”€ contracts/           # API contracts
+â”‚       â””â”€â”€ DB/                  # Database connection
+â”‚           â””â”€â”€ index.ts
+â”œâ”€â”€ tests/                        # Test files
+â”‚   â”œâ”€â”€ smoke/                   # Smoke tests
+â”‚   â””â”€â”€ contracts/               # Contract tests
+â”œâ”€â”€ dist/                        # Compiled output
+â””â”€â”€ package.json
 ```
 
 #### Frontend Structure (`advyon-client/`)
 
 ```
 advyon-client/
-├── public/                      # Static assets
-├── src/
-│   ├── main.jsx                # React entry point
-│   ├── index.css               # Global styles
-│   ├── App.jsx                 # Root component
-│   ├── routes/
-│   │   └── index.jsx           # React Router config
-│   ├── components/             # Shared components
-│   │   ├── ui/                 # Shadcn UI components
-│   │   ├── layout/             # Layout components
-│   │   ├── auth/               # Auth components
-│   │   ├── 3d/                 # Three.js components
-│   │   ├── AIAssistant.jsx    # AI chat widget
-│   │   ├── Sidebar.jsx         # Navigation
-│   │   ├── Navbar.jsx          # Header
-│   │   └── SmartFileUploader.jsx
-│   ├── pages/                  # Page components
-│   │   ├── auth/               # Auth pages
-│   │   │   ├── SignInPage.jsx
-│   │   │   ├── SignUpPage.jsx
-│   │   │   └── AuthSuccessPage.jsx
-│   │   ├── dashboard/          # Dashboard pages
-│   │   │   ├── Dashboard.jsx
-│   │   │   ├── WorkspacePage.jsx
-│   │   │   ├── CreateCasePage.jsx
-│   │   │   ├── ProfilePage.jsx
-│   │   │   ├── SchedulePage.jsx
-│   │   │   ├── AnalyticsPage.jsx
-│   │   │   ├── CommunityHubPage.jsx
-│   │   │   ├── AIToolsPage.jsx
-│   │   │   ├── BillingPage.jsx
-│   │   │   ├── FindLawyersPage.jsx    # NEW: Lawyer Directory
-│   │   │   ├── ChatPage.jsx           # NEW: Real-time Chat
-│   │   │   └── ...
-│   │   └── public/             # Public pages
-│   │       ├── Home.jsx
-│   │       ├── AboutPage.jsx
-│   │       ├── ContactPage.jsx
-│   │       └── ...
-│   ├── features/               # Feature modules
-│   │   ├── workspace/
-│   │   ├── community/
-│   │   ├── profile/
-│   │   └── schedule/
-│   ├── services/               # API services
-│   │   ├── auth/
-│   │   ├── cases/
-│   │   ├── documents/
-│   │   ├── users/
-│   │   ├── chat/               # NEW: Real-time chat
-│   │   └── ...
-│   ├── store/                 # Zustand stores
-│   │   ├── useAuthStore.js
-│   │   ├── useAIStore.js
-│   │   ├── useCommunityStore.js
-│   │   └── ...
-│   ├── hooks/                 # Custom hooks
-│   ├── layouts/               # Layout wrappers
-│   │   ├── AppLayout.jsx
-│   │   ├── DashboardLayout.jsx
-│   │   └── AuthLayout.jsx
-│   └── lib/                   # Utilities
-│       ├── api/               # API client
-│       ├── config/            # Env config
-│       ├── validation/        # Zod schemas
-│       └── stripe/
-├── tailwind.config.js
-├── vite.config.js
-└── package.json
+â”œâ”€â”€ public/                      # Static assets
+â”œâ”€â”€ src/
+â”‚   â”œâ”€â”€ main.jsx                # React entry point
+â”‚   â”œâ”€â”€ index.css               # Global styles
+â”‚   â”œâ”€â”€ App.jsx                 # Root component
+â”‚   â”œâ”€â”€ routes/
+â”‚   â”‚   â””â”€â”€ index.jsx           # React Router config
+â”‚   â”œâ”€â”€ components/             # Shared components
+â”‚   â”‚   â”œâ”€â”€ ui/                 # Shadcn UI components
+â”‚   â”‚   â”œâ”€â”€ layout/             # Layout components
+â”‚   â”‚   â”œâ”€â”€ auth/               # Auth components
+â”‚   â”‚   â”œâ”€â”€ 3d/                 # Three.js components
+â”‚   â”‚   â”œâ”€â”€ AIAssistant.jsx    # AI chat widget
+â”‚   â”‚   â”œâ”€â”€ Sidebar.jsx         # Navigation
+â”‚   â”‚   â”œâ”€â”€ Navbar.jsx          # Header
+â”‚   â”‚   â””â”€â”€ SmartFileUploader.jsx
+â”‚   â”œâ”€â”€ pages/                  # Page components
+â”‚   â”‚   â”œâ”€â”€ auth/               # Auth pages
+â”‚   â”‚   â”‚   â”œâ”€â”€ SignInPage.jsx
+â”‚   â”‚   â”‚   â”œâ”€â”€ SignUpPage.jsx
+â”‚   â”‚   â”‚   â””â”€â”€ AuthSuccessPage.jsx
+â”‚   â”‚   â”œâ”€â”€ dashboard/          # Dashboard pages
+â”‚   â”‚   â”‚   â”œâ”€â”€ Dashboard.jsx
+â”‚   â”‚   â”‚   â”œâ”€â”€ WorkspacePage.jsx
+â”‚   â”‚   â”‚   â”œâ”€â”€ CreateCasePage.jsx
+â”‚   â”‚   â”‚   â”œâ”€â”€ ProfilePage.jsx
+â”‚   â”‚   â”‚   â”œâ”€â”€ SchedulePage.jsx
+â”‚   â”‚   â”‚   â”œâ”€â”€ AnalyticsPage.jsx
+â”‚   â”‚   â”‚   â”œâ”€â”€ CommunityHubPage.jsx
+â”‚   â”‚   â”‚   â”œâ”€â”€ AIToolsPage.jsx
+â”‚   â”‚   â”‚   â”œâ”€â”€ BillingPage.jsx
+â”‚   â”‚   â”‚   â”œâ”€â”€ FindLawyersPage.jsx    # NEW: Lawyer Directory
+â”‚   â”‚   â”‚   â”œâ”€â”€ ChatPage.jsx           # NEW: Real-time Chat
+â”‚   â”‚   â”‚   â””â”€â”€ ...
+â”‚   â”‚   â””â”€â”€ public/             # Public pages
+â”‚   â”‚       â”œâ”€â”€ Home.jsx
+â”‚   â”‚       â”œâ”€â”€ AboutPage.jsx
+â”‚   â”‚       â”œâ”€â”€ ContactPage.jsx
+â”‚   â”‚       â””â”€â”€ ...
+â”‚   â”œâ”€â”€ features/               # Feature modules
+â”‚   â”‚   â”œâ”€â”€ workspace/
+â”‚   â”‚   â”œâ”€â”€ community/
+â”‚   â”‚   â”œâ”€â”€ profile/
+â”‚   â”‚   â””â”€â”€ schedule/
+â”‚   â”œâ”€â”€ services/               # API services
+â”‚   â”‚   â”œâ”€â”€ auth/
+â”‚   â”‚   â”œâ”€â”€ cases/
+â”‚   â”‚   â”œâ”€â”€ documents/
+â”‚   â”‚   â”œâ”€â”€ users/
+â”‚   â”‚   â”œâ”€â”€ chat/               # NEW: Real-time chat
+â”‚   â”‚   â””â”€â”€ ...
+â”‚   â”œâ”€â”€ store/                 # Zustand stores
+â”‚   â”‚   â”œâ”€â”€ useAuthStore.js
+â”‚   â”‚   â”œâ”€â”€ useAIStore.js
+â”‚   â”‚   â”œâ”€â”€ useCommunityStore.js
+â”‚   â”‚   â””â”€â”€ ...
+â”‚   â”œâ”€â”€ hooks/                 # Custom hooks
+â”‚   â”œâ”€â”€ layouts/               # Layout wrappers
+â”‚   â”‚   â”œâ”€â”€ AppLayout.jsx
+â”‚   â”‚   â”œâ”€â”€ DashboardLayout.jsx
+â”‚   â”‚   â””â”€â”€ AuthLayout.jsx
+â”‚   â””â”€â”€ lib/                   # Utilities
+â”‚       â”œâ”€â”€ api/               # API client
+â”‚       â”œâ”€â”€ config/            # Env config
+â”‚       â”œâ”€â”€ validation/        # Zod schemas
+â”‚       â””â”€â”€ stripe/
+â”œâ”€â”€ tailwind.config.js
+â”œâ”€â”€ vite.config.js
+â””â”€â”€ package.json
 ```
 
 ---
@@ -1383,43 +1399,43 @@ All responses follow a standardized structure:
 
 ```javascript
 // Public Routes (AppLayout)
-- /                     → Home
-- /auth/signin          → Sign In
-- /auth/signup          → Sign Up
-- /auth/success         → Auth Success
-- /onboarding            → Role Selection
-- /contact               → Contact
-- /about                 → About
-- /how-to-use           → How to Use
-- /blog                 → Blog
-- /terms                → Terms
-- /privacy              → Privacy
-- /cookies              → Cookie Policy
-- /security             → Security
-- /accessibility        → Accessibility
+- /                     â†’ Home
+- /auth/signin          â†’ Sign In
+- /auth/signup          â†’ Sign Up
+- /auth/success         â†’ Auth Success
+- /onboarding            â†’ Role Selection
+- /contact               â†’ Contact
+- /about                 â†’ About
+- /how-to-use           â†’ How to Use
+- /blog                 â†’ Blog
+- /terms                â†’ Terms
+- /privacy              â†’ Privacy
+- /cookies              â†’ Cookie Policy
+- /security             â†’ Security
+- /accessibility        â†’ Accessibility
 
 // Protected Routes (DashboardLayout)
-- /dashboard                   → Main Dashboard
-- /dashboard/workspace          → Case Workspace
-- /dashboard/workspace/:caseId → Case Details
-- /dashboard/cases/new         → Create Case
-- /dashboard/cases/active      → Active Cases
-- /dashboard/cases/archived   → Archived Cases
-- /dashboard/documents        → My Documents
-- /dashboard/schedule          → Calendar
-- /dashboard/schedule/new      → Create Event
-- /dashboard/community         → Community Hub
-- /dashboard/community/ask     → Ask Question
-- /dashboard/community/thread/:id → Thread Detail
-- /dashboard/legal            → Legal Search
-- /dashboard/ai-assistant     → AI Tools
-- /dashboard/profile          → Profile
-- /dashboard/profile/verify   → Lawyer Verification
-- /dashboard/clients          → My Clients (Lawyer)
-- /dashboard/analytics       → Analytics (Lawyer)
-- /dashboard/admin            → Admin Panel
-- /dashboard/billing          → Billing
-- /dashboard/settings         → Settings
+- /dashboard                   â†’ Main Dashboard
+- /dashboard/workspace          â†’ Case Workspace
+- /dashboard/workspace/:caseId â†’ Case Details
+- /dashboard/cases/new         â†’ Create Case
+- /dashboard/cases/active      â†’ Active Cases
+- /dashboard/cases/archived   â†’ Archived Cases
+- /dashboard/documents        â†’ My Documents
+- /dashboard/schedule          â†’ Calendar
+- /dashboard/schedule/new      â†’ Create Event
+- /dashboard/community         â†’ Community Hub
+- /dashboard/community/ask     â†’ Ask Question
+- /dashboard/community/thread/:id â†’ Thread Detail
+- /dashboard/legal            â†’ Legal Search
+- /dashboard/ai-assistant     â†’ AI Tools
+- /dashboard/profile          â†’ Profile
+- /dashboard/profile/verify   â†’ Lawyer Verification
+- /dashboard/clients          â†’ My Clients (Lawyer)
+- /dashboard/analytics       â†’ Analytics (Lawyer)
+- /dashboard/admin            â†’ Admin Panel
+- /dashboard/billing          â†’ Billing
+- /dashboard/settings         â†’ Settings
 ```
 
 ### Key Components
@@ -1614,7 +1630,7 @@ const verifyToken = async (token: string) => {
 
 **Case Lifecycle**:
 ```
-Draft → Active → Pending Review → Closed → Archived
+Draft â†’ Active â†’ Pending Review â†’ Closed â†’ Archived
 ```
 
 ### 2. Document Management
@@ -1630,7 +1646,7 @@ Draft → Active → Pending Review → Closed → Archived
 
 **AI Analysis Pipeline**:
 ```
-Upload → Queue → Processing → Analysis → Complete
+Upload â†’ Queue â†’ Processing â†’ Analysis â†’ Complete
 ```
 
 ### 3. Community Forum
@@ -1817,3 +1833,4 @@ http://localhost:5000/api-docs
 *Document Version: 1.0*
 *Last Updated: March 2026*
 *Advyon Legal Platform - All Rights Reserved*
+

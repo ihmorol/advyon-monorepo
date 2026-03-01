@@ -232,7 +232,7 @@ mongodb+srv://advyon_app:YOUR_PASSWORD@advyon-prod.xxxxx.mongodb.net/advyon_lega
 |---------|-------|
 | **Name** | advyon-api |
 | **Environment** | Node |
-| **Build Command** | `npm run build` |
+| **Build Command** | `npm run build:prod` |
 | **Start Command** | `npm run prod` |
 | **Instance Type** | Free (or $7/mo Starter) |
 
@@ -295,7 +295,7 @@ OPENROUTER_API_KEY=your_openrouter_key
 | Setting | Value |
 |---------|-------|
 | **Framework Preset** | Vite |
-| **Build Command** | `npm run build` |
+| **Build Command** | `npm run build:prod` |
 | **Output Directory** | `dist` |
 
 ### 6.3 Environment Variables
