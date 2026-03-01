@@ -1,0 +1,13 @@
+{
+  "name": "advyon-legal-platform",
+  "version": "1.0.0",
+  "description": "Advyon Legal Platform - Deployment Test Script",
+  "scripts": {
+    "test:deploy": "node scripts/test-deployment-readiness.js",
+    "test:server": "cd advyon-server && npm run build",
+    "test:client": "cd advyon-client && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
