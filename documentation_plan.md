@@ -49,7 +49,7 @@ Parallelization rule: orchestrator unblocks Workstreams 1–5 simultaneously after
   - Endpoint tables (method, path, auth, request schema, response schema, error codes) extracted from `advyon-server/src/app/modules/<module>/*`.
   - Inline code references (e.g., ``[`case.service.ts`](advyon-server/src/app/modules/case/case.service.ts)``) so readers can jump to source.
   - Example requests/responses using fenced `json` blocks.
-  - Cross-links to related modules (e.g., `caseAccess` ? `case`).
+  - Cross-links to related modules (e.g., `caseAccess` <-> `case`).
 - Expand nav to include new files: `api/analytics.md`, `api/chat.md`, `api/contact.md`, `api/gamification.md`, `api/health.md`, `api/payment.md`, `api/socket.md`, `api/subscription.md`.
 - Build `architecture/database.md` capturing Mongo collections, indexes, and relationships (Mermaid `erDiagram` or `classDiagram`). Document data retention + backups.
 
@@ -69,9 +69,9 @@ Parallelization rule: orchestrator unblocks Workstreams 1–5 simultaneously after
 
 ### WS5 – Data Flow, Integrations & AI (Owner: architecture-lead + ai-ml-specialist + data-engineer)
 - Create `architecture/data-flow.md` with layered diagrams:
-  - L0 context diagram (actors ? platform).
+  - L0 context diagram (actors -> platform).
   - L1 diagram for critical journeys: Case intake, Document automation, AI legal assistant.
-  - Sequence diagram for AI workflows (client prompts ? API ? provider ? response stream) referencing `advyon-server/src/app/modules/ai/*` and `advyon-client/src/features/ai` (if present).
+  - Sequence diagram for AI workflows (client prompts -> API -> provider -> response stream) referencing `advyon-server/src/app/modules/ai/*` and `advyon-client/src/features/ai` (if present).
 - Document analytics/data pipelines (events captured, sinks, dashboards). If not yet implemented, call out TODO + owner.
 - Outline integration touchpoints (Stripe, Cloudinary, email/push providers) with credentials and webhook flows.
 
